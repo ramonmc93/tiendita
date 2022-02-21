@@ -550,6 +550,10 @@ button {
     background-color: #DEFEF2!important;  
 }
 
+.colorFondoFF3F9738 {
+    background-color: rgba(255, 63, 151, 0.22)!important;
+}
+
 .colorFondoTransparente {
     background: transparent;
 }
@@ -990,10 +994,6 @@ label {
     background-color: #8e93ff!important;
 }
 
-.itemMenuPrincipal:hover > img {
-    content: url("../img/bieneta_tubo_ensayo_ancho_azul.svg");
-}
-
 
 /* Cambios estilos bootstrap */
 .alert-info-cambio {
@@ -1006,4 +1006,83 @@ label {
     background-color: var(--colorPrimarioPrincipal)!important;
     border-color: var(--colorPrimarioTercero)!important;
     color: #fff!important;
+}
+
+/* Botón flotante */
+
+.btn-flotante {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	font-size: 50px;
+	color: #fff;
+	border-style: none;
+	background: #ff80ba;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 180px;
+	left: 350px;
+	z-index: 1;
+	border: 3px solid #fff;
+	box-shadow: 0 0 10px 5px rgb(0 0 0 / 20%)!important;
+}
+
+.btn-flotante img {
+	width: 41px;
+}
+
+/* Botones de acción correspondiente a la tabla del módulo N */
+
+.btnConsultar, .btnCancelar {
+    background-color: var(--colorPrimarioTercero);
+    border-color: var(--colorPrimarioTercero);
+}
+
+.btnConsultar:hover, .btnConsultar:focus, .btnCancelar:hover, .btnCancelar:focus {
+    background-color: var(--colorPrimarioPrincipal);
+    border-color: var(--colorPrimarioPrincipal);
+}
+
+.btnEditar, .btnGuardarActualizar {
+    background-color: var(--colorSecundarioSegundo);
+    border-color: var(--colorSecundarioSegundo);
+}
+
+.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus {
+    background-color: var(--colorSecundarioPrincipal);
+    border-color: var(--colorSecundarioPrincipal);
+}
+
+.btnEliminar {
+    background-color: var(--colorRojoBajo);
+    border-color: var(--colorRojoBajo);
+}
+
+.btnEliminar:hover, .btnEliminar:focus {
+    background-color: var(--colorRojoAlto);
+    border-color: var(--colorRojoAlto);
+}
+
+/* Campo obligatorio */
+.campoObligatorio {
+	font-size: 10px;
+	color: red;
+	margin-top: -2px;
+	display: block;
+}
+
+/* Datetimepicker */
+*[data-toggle="datetimepicker"] {
+    position: relative;
+}
+
+*[class="input-group-text"] {
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	right: 0;
+    border-radius: 0;
+    border-right: 0;
 }

@@ -14,13 +14,22 @@
         @endphp
 
         @for ($i = 1; $i <= 4; $i++)
-
+    
             @php
+                
+                $imagenDefault = "imagen_default_2.png";
                 $nombreProducto = "Producto ".$i;
-                $imagenDefault = ( $i %2 == 0) ? "imagen_default_1.png" : "imagen_default_2.png";
+                $className = "colorFondoDEFEF2";
+
+                if( $i %2 == 0 ):
+                    $imagenDefault = "imagen_default_1.png";
+                    $className = "colorFondoFF3F9738";
+                endif;
+
             @endphp
 
             <x-card-producto
+            :class-name="$className"
             :nombre-producto="$nombreProducto"
             :id-producto="$idProducto"
             :precio="$precio"

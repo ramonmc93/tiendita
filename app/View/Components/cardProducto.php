@@ -14,8 +14,9 @@ class cardProducto extends Component
     public $stock;
     public $totalLikes;
     public $imagenDefault;
+    public $className;
 
-    public function __construct($nombreProducto, $idProducto, $precio, $descuento, $stock, $totalLikes, $imagenDefault)
+    public function __construct($nombreProducto, $idProducto, $precio, $descuento, $stock, $totalLikes, $imagenDefault, $className)
     {
         $this->nombreProducto = $nombreProducto;
         $this->idProducto = $idProducto;
@@ -24,6 +25,7 @@ class cardProducto extends Component
         $this->stock = $stock;
         $this->totalLikes = $totalLikes;
         $this->imagenDefault = $imagenDefault;
+        $this->className = $className;
     }
 
     /**

@@ -7,7 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title-module')</title>
-        <link rel="stylesheet" href="{{asset('css/bootstrap/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/librerias/bootstrap/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/fontawesome/css/font-awesome.min.css')}}">
+        @yield('estilos-modulos-otros')
         <link rel="stylesheet" href="{{asset('css/colores.css')}}">
         <link rel="stylesheet" href="{{asset('css/estilosPersonalizados.css')}}">
         <link rel="stylesheet" href="{{asset('css/estilosCard.css')}}">
@@ -55,14 +57,19 @@
                     <li>
                         <a href="#" class="cerrarSesion">Cerrar sesión</a>
                     </li>
-                    @php
-                        $nombreVista = "";
-                    @endphp
-                    @if ( $nombreVista != "modules.base.index" )
+                    @if ( $nombreVista != "index")
                         <li>
-                            <a href="/administradores">Módulo de administradores</a>
+                            <a href="/">Página principal</a>
                         </li>
                     @endif
+                    @if ( $nombreVista != "modulos.administradores" )
+                        <li>
+                            <a href="/modulos/administradores">Módulo de administradores</a>
+                        </li>
+                    @endif
+                    <li>
+                        <a href="/modulos/productos">Módulo de productos</a>
+                    </li>
                 </ul>
             </nav>
         </article>
@@ -74,15 +81,25 @@
                     @yield('title-module')
                 </h1>
             </div>
-            <section class="container d-flex justify-content-center">
-                <article class="w-p-90 mt-4 row justify-content-center mt20 listaProductosRegistrados">
-                    @yield('content-cards-producto')
-                </article>
+            <section class="container-fluid d-flex justify-content-center">
+                @yield('content-cards-producto')
+                @yield('content-tabla-modulo')
             </section>
-            {{-- Butón nuevo registro --}}
-            <a href="/usuario/nuevo" class="btn-flotante {{@$identificadorBoton}}" title="Agregar nuevo {{@$identificadorAccion}}">            
-                <img src="{{asset('imagenes/botones/agregar.svg')}}" alt="Agregar nuevo {{@$identificadorAccion}}">
-            </a>
+            {{-- Butones de acción módulo. --}}
+            @php
+                if ( empty($identificadorBoton) ):
+                    $identificadorAccion = "";
+                    $identificadorBoton = "";
+                endif;  
+            @endphp 
+            <button
+            type="button"
+            class="btn-flotante {{$identificadorBoton}}" 
+            data-bs-toggle="modal" 
+            data-bs-target="#modalAdmnistradores"
+            title="Agregar nuevo {{$identificadorAccion}}">
+                <img src="{{asset('imagenes/botones/agregar.svg')}}" alt="Agregar nuevo {{$identificadorAccion}}">
+            </button>
         </main>
         
         <footer>
@@ -96,10 +113,13 @@
         </footer>
 
         <script src="{{asset('js/jquery/dist/jquery.min.js')}}"></script>
-        <script src="{{ asset('css/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/plugins/moment/moment.js')}}"></script>
+        <script src="{{asset('js/plugins/moment/locale.js')}}"></script>
+        <script src="{{asset('js/plugins/tempusdominus/tempusdominus-bootstrap-4.min.js')}}"></script>
         <script src="{{asset('js/main.js')}}"></script>
-        <script src="{{ asset('js/modulos/usuarios.js') }}"></script>
-        <script src="{{asset('js/modulos/login.js')}}"></script>
+        @yield('scripts-modulos-otros')
     </body>
     </html>
 @endif
