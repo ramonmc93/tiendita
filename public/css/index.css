@@ -1,0 +1,173 @@
+body {
+    margin: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+}
+
+header, footer {
+    /* width: 100%; */
+    padding: 20px;
+    height: 200px;
+    background-color: #28DF99;
+    box-shadow: 0 0 12px 3px rgb(0 0 0 / 50%);
+}
+
+footer {
+    /* position: absolute; */
+    /* bottom: 0; */
+}
+
+main {
+    min-height: 600px;
+    max-height: auto;
+}
+
+header, footer, main {
+    width: 85%;
+    float: right;
+}
+
+/* Menú */
+.contenedorBotonHamburguesa {
+    margin-top: 10px;
+}
+
+.btnHamburguesa {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.iconoHamburguesa {
+    width: 25px;
+    margin: 0px auto;
+}
+
+.iconoHamburguesa .lineas:nth-child(1) {
+    margin-top: 5px;
+}
+
+.iconoHamburguesa .lineas {
+    width: 100%;
+    height: 3px;
+    margin-bottom: 5px;
+    background-color: rgb(71, 71, 71);
+}
+
+.logo img {
+    width: 150px;
+}
+
+.logo p {
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 105px;
+    right: 53px;
+}
+
+.logoSuperior {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.logoInferior {
+    right: unset!important;
+    top: 124px!important;
+    left: 38px;
+}
+
+.contenedorBuscadorFiltros {
+    color: #fff;
+}
+
+.contenedorBuscadorFiltros input, .btnBuscarFiltroBusqueda {
+    border-radius: 0px!important;
+}
+
+.btnBuscarFiltroBusqueda {
+    background-color: var(--colorPrimarioSegundo);
+    border-color: inherit;
+}
+
+
+.btnBuscarFiltroBusqueda:hover {
+    background-color: var(--colorPrimarioPrincipal);
+    border-color: inherit;
+}
+
+.lupaBuscador {
+    width: 20px!important;
+}
+
+/* Estilo títulos */
+.contenedorTituloModulo {
+    height: 100px;
+    background: rebeccapurple;
+    justify-content: center;
+    background-color: var(--colorPrimarioSegundo);
+    color: #fff;
+    box-shadow: 0 -1px 12px 3px rgb(0 0 0 / 50%);
+}
+
+.nombrePrincipal a {
+    display: flex;
+    justify-content: center;
+}
+
+.contenedorNombreProyecto > * {
+    font: 400 49px Arial, sans-serif;
+}
+
+.contenedorNombreProyecto span:nth-child(1) {
+    color: var(--colorPrimarioPrincipal);
+}
+
+.contenedorNombreProyecto span:nth-child(2) {
+    color: #BDFFE6;
+}
+
+/* Menú */
+.menu {
+    width: 15%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #ff3f97;
+    z-index: 2;
+    box-shadow: 0 0 12px 3px rgb(0 0 0 / 50%);
+}
+
+.menu nav {
+    height: 100%;
+    margin-top: 80px;
+}
+
+.menu li > *, .menu li {
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.menu li > * {
+    padding: 10px;
+}
+
+.menu li > *:hover, .menu li > *:focus {
+    background-color: var(--colorPrimarioTercero);
+}

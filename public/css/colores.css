@@ -1,0 +1,19 @@
+:root {
+    --colorPrimarioPrincipal: #ff0075;
+    --colorPrimarioSegundo: #ff3f97;
+    --colorPrimarioTercero: #ff80ba;
+    --colorPrimarioCuarto: #ffacd2;
+    --colorPrimarioQuinto: #ffcfe5;
+    --colorSecundarioPrincipal: #28df99;
+    --colorSecundarioSegundo: #4df8b6;
+    --colorSecundarioTercero: #81fece;
+    --colorSecundarioCuarto: #bdffe6;
+    --colorSecundarioQuinto: #defef2;
+    --colorBlanco: #ffffff;
+    --colorNegro: #000000;
+    --colorRojoBajo: #e74c68;
+    --colorRojoAlto: #fa163f;
+    --colorVerdeBajo: #81fece;
+    --colorVerdeMediano: #63deae;
+    --colorVerdeAlto: #28df99;
+}

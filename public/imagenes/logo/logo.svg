@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="413.8707"
+   height="319.31314"
+   viewBox="0 0 413.8707 319.31314"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.89765625"
+     inkscape:cx="195.50914"
+     inkscape:cy="159.86075"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8029"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1567"
+       x="-0.020577143"
+       y="-0.027975667"
+       width="1.0411543"
+       height="1.0559513">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.3114213"
+         id="feGaussianBlur1569" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1945"
+       x="-0.068717168"
+       y="-0.068717168"
+       width="1.1374343"
+       height="1.1374343">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="8.0379349"
+         id="feGaussianBlur1947" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-153.06465,-200.34343)">
+    <g
+       id="g8029"
+       transform="translate(23.078078,26.353345)">
+      <g
+         id="g8141"
+         inkscape:export-filename="C:\Users\cruzc\Pictures\LAJITASHOP\logo.png"
+         inkscape:export-xdpi="600"
+         inkscape:export-ydpi="600">
+        <ellipse
+           style="mix-blend-mode:normal;fill:#81fece;fill-opacity:1;fill-rule:evenodd;filter:url(#filter1567)"
+           id="path31-9-4"
+           cy="435.93829"
+           cx="144.69951"
+           rx="134.79547"
+           ry="99.147079"
+           transform="rotate(-25.556698,34.104194,-116.2154)" />
+        <ellipse
+           style="fill:#28df99;fill-opacity:1;fill-rule:evenodd;stroke-width:1.11427"
+           id="path31-9"
+           cy="480.67929"
+           cx="34.541061"
+           rx="159.12544"
+           ry="104.27843"
+           transform="matrix(0.84649795,-0.53239197,0.64835086,0.76134169,0,0)" />
+        <circle
+           style="fill:#ff80ba;fill-opacity:1;fill-rule:evenodd;stroke-width:1.04132;filter:url(#filter1945)"
+           id="path31-2"
+           cx="289.64316"
+           cy="333.64667"
+           r="140.36554" />
+        <circle
+           style="fill:#ff0075;fill-opacity:1;fill-rule:evenodd"
+           id="path31"
+           cx="289.64316"
+           cy="333.64667"
+           r="134.79547" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:64px;line-height:1.25;font-family:sans-serif;fill:#defef2;fill-opacity:1;stroke:none"
+           x="194.87753"
+           y="356.91229"
+           id="text2729"><tspan
+             sodipodi:role="line"
+             id="tspan2727"
+             x="194.87753"
+             y="356.91229"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#defef2;fill-opacity:1">LASH</tspan></text>
+        <circle
+           style="fill:#28df99;fill-opacity:1"
+           id="path7689"
+           cx="356.48392"
+           cy="268.47693"
+           r="18.938208" />
+        <circle
+           style="fill:#81fece;fill-opacity:1;stroke-width:0.529412"
+           id="path7689-9"
+           cx="290.75717"
+           cy="386.56226"
+           r="10.02611" />
+        <circle
+           style="fill:#bdffe6;fill-opacity:1;stroke-width:0.294118"
+           id="path7689-9-0"
+           cx="324.17755"
+           cy="430.00873"
+           r="5.5700607" />
+      </g>
+    </g>
+  </g>
+</svg>

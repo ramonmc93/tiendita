@@ -1,0 +1,76 @@
+.tarjetaPost {
+    width: 350px;
+    max-width: 350px;
+    height: auto;
+    max-height: 500px;
+    /* background-image: url("../img/card_post.svg"); */
+    background-color: rgb(0, 0, 0, 0.08);
+    /* opacity: 0.5; */
+}
+
+.figureCatalogo {
+    width: 100%;
+}
+
+.figureCatalogo img {
+    width: inherit;
+    cursor: pointer;
+}
+
+figcaption {
+    background: #28DF99;
+    color: #defef2;
+    padding: 4px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- Imágenes superiores */
+.otrasImagenesCatalogo {
+    width: inherit;
+    display: block;
+    background-color: #28DF99;
+}
+
+.otrasImagenesCatalogo img {
+    width: 70px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.contenedorBotonesPrincipales {
+    width: inherit;
+}
+
+.contenedorImagenPrincipal {
+    min-width: 326px;
+    max-width: 326px;
+    min-height: 200px;
+    max-height: 200px;
+    width: inherit;
+    overflow: hidden;
+}
+
+/* .imagenVertical img {    
+    transform: scale(0.5, 0.5) translate(0px, -50%);
+} */
+
+.contenedorImagenPrincipal img {
+    transform: scale(1);
+}
+
+.prop-partes-card {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: left;
+    background-position-y: center;
+}
+
+/* Colores cards */
+.colorFondo81fece {
+	background-color: var(--colorSecundarioSegundo)!important;
+}
+
+.colorFondo28DF99 {
+	background-color: var(--colorSecundarioPrincipal) !important;
+}
