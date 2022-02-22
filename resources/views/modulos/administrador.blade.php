@@ -107,7 +107,7 @@
                                 <label for="email">Email:</label>
                                 <input 
                                 class="form-control"
-                                type="text" 
+                                type="email" 
                                 name="email">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>

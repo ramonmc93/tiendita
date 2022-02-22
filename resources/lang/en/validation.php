@@ -145,6 +145,19 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'email' => [
+            'email' => 'El correo electrónico es incorrecto.',
+        ],
+        'nombre' => [
+            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 8 caracteres máximo 25.',
+            'min' => 'El :attribute debe de tener una longitud mínima de 3 caracteres.',
+            'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
+        ],
+        'apellidoPaterno' => [
+            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 8 caracteres máximo 25.',
+            'min' => 'El :attribute debe de tener una longitud mínima de 3 caracteres.',
+            'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
+        ],
     ],
 
     /*

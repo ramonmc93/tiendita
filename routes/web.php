@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Administrador;
+use App\Http\Controllers\AdministradorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +27,4 @@ Route::get('/modulos/administradores', function(){
     return view("modulos.administrador");
 });
 
-Route::post('/administradores/guardar', [Administrador::class], 'guardarAdministrador');
+Route::post('/administradores/guardar-modificar', [AdministradorController::class, 'guardarAdministrador']);

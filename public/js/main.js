@@ -7,3 +7,14 @@ window.addEventListener("DOMContentLoaded", function() {
     });
     
 });
+
+function obtenerNameCamposFormularios(idFormulario) {
+
+    var arrayPropiedadName = [];
+    $("#"+idFormulario+" input[type='text'], input[type='email'], textarea").each(function(i, j){
+        arrayPropiedadName[i] = j.name;
+    });
+
+    return arrayPropiedadName;
+
+}
