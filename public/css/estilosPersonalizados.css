@@ -1086,3 +1086,7 @@ label {
     border-radius: 0;
     border-right: 0;
 }
+
+.invalido {
+    background-color: rgb(255, 190, 190);
+}

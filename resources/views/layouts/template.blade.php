@@ -115,6 +115,10 @@
         <script src="{{asset('js/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        {{-- bootbox code --}}
+        <script src="{{asset('js/librerias/bootbox/dist/bootbox.min.js')}}"></script>
+        <script src="{{asset('js/librerias/bootbox/dist/bootbox.locales.min.js')}}"></script>
+        {{--bootbox code end --}}
         <script src="{{asset('js/plugins/moment/moment.js')}}"></script>
         <script src="{{asset('js/plugins/moment/locale.js')}}"></script>
         <script src="{{asset('js/plugins/tempusdominus/tempusdominus-bootstrap-4.min.js')}}"></script>

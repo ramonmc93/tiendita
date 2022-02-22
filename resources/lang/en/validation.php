@@ -147,6 +147,7 @@ return [
         ],
         'email' => [
             'email' => 'El correo electrónico es incorrecto.',
+            'unique' => 'El email que esta intentando utilizar para el registro ya existe.'
         ],
         'nombre' => [
             'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 8 caracteres máximo 25.',

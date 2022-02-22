@@ -18,7 +18,26 @@ window.addEventListener("DOMContentLoaded", function(){
                 data:frmAdministrador,
                 dataType:"JSON",
                 success:function(data){
-                    console.log(data);
+                    
+                    if ( data["estado"] == "validaciones" ) {
+
+                        var arrayPropiedadName = obtenerPropiedadNameCamposFormularios("frmAdministradores");
+
+                        for ( let propName of arrayPropiedadName ) {   
+
+                            var validacion = data.validaciones[propName];     
+                            var campoActual = $("*[name='"+propName+"']")[0];
+
+                            if ( validacion != undefined ) {                                
+                                campoActual.classList.add("invalido");
+                            } else {
+                                campoActual.classList.remove("invalido");
+                            }                    
+
+                        }
+
+                    }
+
                 }
                 
             });

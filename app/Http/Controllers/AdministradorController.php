@@ -30,6 +30,7 @@ class AdministradorController extends Controller
         $codigoPostal = $request->codigoPostal;
         $idAdministrador = $request->idAdministrador;
 
+        // ---- Validaciones
         $validator = Validator::make(
             [
                 'nombre' => $nombre,
@@ -39,13 +40,15 @@ class AdministradorController extends Controller
             [
                 'nombre' => 'required|min:3|max:25',
                 'apellidoPaterno' => 'required|min:3|max:25',
-                'email' => 'required|email|unique:administradores'
+                'email' => 'email|unique:administradores'
             ]
         );
 
         if ( !$validator->passes() ) {
-            print_r( json_encode( $validator->messages() ) );
+            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
         }
+
+        print_r( json_encode( $estadoRespuesta ) );
 
         return false;
 

@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", function() {
     
 });
 
-function obtenerNameCamposFormularios(idFormulario) {
+function obtenerPropiedadNameCamposFormularios(idFormulario) {
 
     var arrayPropiedadName = [];
     $("#"+idFormulario+" input[type='text'], input[type='email'], textarea").each(function(i, j){
