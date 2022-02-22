@@ -5,6 +5,10 @@ window.addEventListener("DOMContentLoaded", function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $(document).on("click", ".btnCerrarNotificacion", function(){
+        $(".notificacionesError").addClass("d-none");
+    });
     
 });
 

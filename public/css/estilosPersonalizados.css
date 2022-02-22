@@ -1065,6 +1065,37 @@ label {
     border-color: var(--colorRojoAlto);
 }
 
+/* Notificaciones, error, warning, success, etc. */
+.btnCerrarNotificacion {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    right: -3px;
+    top: -5px;
+}
+
+.btnCerrarNotificacion i {
+    font-size: 12px;
+}
+
+.notificacionesError {
+    position: relative;
+    height: auto;
+    max-height: 150px;
+}
+
+.contenedorNotificaciones {
+    min-height: 65px;
+	max-height: 130px;
+	overflow-y: auto;
+}
+
+.contenedorNotificaciones span {
+    font-size: 12px;
+    display: block;
+}
+
 /* Campo obligatorio */
 .campoObligatorio {
 	font-size: 10px;

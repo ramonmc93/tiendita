@@ -150,15 +150,20 @@ return [
             'unique' => 'El email que esta intentando utilizar para el registro ya existe.'
         ],
         'nombre' => [
-            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 8 caracteres máximo 25.',
+            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.',
             'min' => 'El :attribute debe de tener una longitud mínima de 3 caracteres.',
             'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
         ],
         'apellidoPaterno' => [
-            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 8 caracteres máximo 25.',
+            'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.',
             'min' => 'El :attribute debe de tener una longitud mínima de 3 caracteres.',
             'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
         ],
+        'telCelular' => [
+            'numeric' => 'El teléfono celulular debe ser númerico de 10 dígitos.',
+            'min' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
+            'max' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
+        ]
     ],
 
     /*

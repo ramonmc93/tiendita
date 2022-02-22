@@ -57,19 +57,16 @@
                     <li>
                         <a href="#" class="cerrarSesion">Cerrar sesión</a>
                     </li>
-                    @if ( $nombreVista != "index")
-                        <li>
-                            <a href="/">Página principal</a>
-                        </li>
-                    @endif
-                    @if ( $nombreVista != "modulos.administradores" )
+                    @if ( $nombreVista != "modulos.administrador" )
                         <li>
                             <a href="/modulos/administradores">Módulo de administradores</a>
                         </li>
                     @endif
-                    <li>
-                        <a href="/modulos/productos">Módulo de productos</a>
-                    </li>
+                    @if ( $nombreVista != "index" )
+                        <li>
+                            <a href="/modulos/productos">Módulo de productos</a>
+                        </li>
+                    @endif
                 </ul>
             </nav>
         </article>
@@ -113,6 +110,7 @@
         </footer>
 
         <script src="{{asset('js/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{asset('js/plugins/popper/popper.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         {{-- bootbox code --}}

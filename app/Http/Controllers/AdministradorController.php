@@ -20,32 +20,36 @@ class AdministradorController extends Controller
     public function guardarAdministrador(Request $request) {
 
         $nombre = trim($request->nombre);
-        $apellidoPaterno = $request->apellidoPaterno;
-        $apellidoMaterno = $request->apellidoMaterno;
-        $telCelular = $request->telCelular;
-        $telCasa = $request->telCasa;
-        $email = $request->email;
-        $fechaNacimiento = $request->fechaNacimiento;
-        $direccion = $request->direccion;
-        $codigoPostal = $request->codigoPostal;
-        $idAdministrador = $request->idAdministrador;
+        $apellidoPaterno = trim($request->apellidoPaterno);
+        $apellidoMaterno = trim($request->apellidoMaterno);
+        $telCelular = trim($request->telCelular);
+        $telCasa = trim($request->telCasa);
+        $email = trim($request->email);
+        $fechaNacimiento = trim($request->fechaNacimiento);
+        $direccion = trim($request->direccion);
+        $codigoPostal = trim($request->codigoPostal);
+        $idAdministrador = trim($request->idAdministrador);
 
         // ---- Validaciones
         $validator = Validator::make(
             [
                 'nombre' => $nombre,
                 'apellidoPaterno' => $apellidoPaterno,
+                'telCelular' => $telCelular,
                 'email' => $email
             ],
             [
                 'nombre' => 'required|min:3|max:25',
                 'apellidoPaterno' => 'required|min:3|max:25',
+                'telCelular' => 'numeric|min:10|max:11',
                 'email' => 'email|unique:administradores'
             ]
         );
 
+        $estadoRespuesta = "";
+        
         if ( !$validator->passes() ) {
-            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages(), $telCelular];
         }
 
         print_r( json_encode( $estadoRespuesta ) );
