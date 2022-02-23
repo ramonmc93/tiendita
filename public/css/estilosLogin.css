@@ -10,6 +10,11 @@ label, button {
     font: bold 15px Arial, sans-serif;
 }
 
+button {
+    background-color: var(--colorPrimarioPrincipal)!important;
+    border-color: var(--colorPrimarioPrincipal)!important;
+}
+
 hr {
     background-color: #88FFF7;
 }

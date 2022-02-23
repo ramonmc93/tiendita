@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", function(){
 
         $.ajax({
 
-            url:"/usuario/login",
+            url:"/iniciar/sesion",
             data: frmLogin,
             method:"POST",
             success:function(data){
@@ -16,8 +16,6 @@ window.addEventListener("DOMContentLoaded", function(){
                     
                     if( data["estado"] == false ) {
                         throw data["mensaje"];
-                    } else {
-                        window.location = "/usuario/index";
                     }
 
                 } catch (error) {

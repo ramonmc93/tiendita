@@ -31,6 +31,11 @@
             return false;
             
         }
+
+        // --- Decodificar resultados de consulta devueltos.
+        public static function parsQuery($stmt){
+            return json_decode(json_encode($stmt), 1);
+        }
         
     }
     

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Library\FuncionesGenerales;
 use App\Models\Administrador;
+use Illuminate\Support\Facades\DB;
 
 use Throwable;
 
@@ -20,9 +21,21 @@ class AdministradorController extends Controller
         $this->administrador = new Administrador();
     }
 
+
     // --- Guardar administrador default.
     public function generarAdministradorDefault() {
         
+        // --- Validar que el usuario no este registrado.
+        $administrador = DB::table('administradores')
+            ->select('idadministradores')
+            ->where('idadministradores', '=', 1)
+            ->where('estado', '=', 'A')
+            ->get();
+
+
+        var_dump($administrador);
+        return;
+
         $estadoGuardado = $this->administrador->generarAdministradorDefault();
         
         if ( $estadoGuardado ) {
@@ -33,6 +46,49 @@ class AdministradorController extends Controller
 
     }
 
+
+    // --- Login, validación de credenciales.
+    public function loginValidacion(Request $request) {
+        
+        $correoUsuario = $request->correoUsuario;
+        $password = $request->password;
+        $estado = 'A';
+        
+        if ( !empty($correoUsuario) && !empty($password) ) {
+            
+            $usuarios = DB::select('SELECT idadministradores, passw, nombre, apellidopaterno, apellidomaterno FROM administradores 
+            WHERE (email = :email OR nombreusuario = :nombreusuario) AND estado = :estado', 
+            ['email' => $correoUsuario, 'nombreusuario' => $correoUsuario, 'estado' => $estado]);
+
+            $arrayDatosUsuarios = array();
+            $passwordConsulta = "";
+            $usuarioEstado = "";
+
+            if ( sizeof($usuarios) > 0 ) {
+
+                $arrayDatosUsuarios = json_decode(json_encode($usuarios), true)[0];
+                $passwordConsulta = $arrayDatosUsuarios["passw"];
+                $nombre = $arrayDatosUsuarios["nombre"];
+                $apellidoPaterno = $arrayDatosUsuarios["apellidopaterno"];
+                $apellidoMaterno = $arrayDatosUsuarios["apellidomaterno"];
+                $idAdministrador = $arrayDatosUsuarios["idadministradores"];
+
+            }
+
+            // Si el password ingresado es correcto, se crean las variables de sesión y se guarda el token de sesión.
+            if ( password_verify($password, $passwordConsulta) ) {
+                $this->modeloUsuario->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
+                return redirect('/');
+            } else {
+                print_r(json_encode(["estado" => false, "mensaje" => "Contraseña y/o usuarios ."]));
+            }
+
+        }
+
+    }
+
+
+    // ---- Guardar nuevos administradores.
     public function guardarAdministrador(Request $request) {
 
         $nombre = trim($request->nombre);

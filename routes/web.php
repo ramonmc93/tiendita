@@ -38,6 +38,8 @@ Route::get('/login', function(){
     return view("login");
 });
 
+Route::post('/iniciar/sesion', [AdministradorController::class, 'loginValidacion']);
+
 
 /**
  * Módulos administradores

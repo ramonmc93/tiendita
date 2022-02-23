@@ -17,8 +17,18 @@ class Administrador extends Model
     //     $this->administrador = new Administrador();
     // }
 
+
+    // --- Función para crear las variables de sesión.
+    public function loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador) {
+        // Se almacenan los datos de la sesión.
+        session(['nombre' => $nombre, 'apellidoPaterno' => $apellidoPaterno, 'apellidoMaterno' => $apellidoMaterno, 'idAdministrador' => $idAdministrador]);
+    }
+
+
+    // --- Función para crear el usuario por default.
     public function generarAdministradorDefault() {
 
+        
         $nombre = "Super";
         $apellidopaterno = "Admin";
         $apellidomaterno = "Admin";
@@ -52,6 +62,8 @@ class Administrador extends Model
             'estado' => $estado,
             'idusuarioregistro' => $idusuarioregistro
         ]);
+
+        loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
 
         return $estadoConsulta;
         

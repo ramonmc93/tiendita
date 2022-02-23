@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="stylesheet" href="{{asset('css/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/librerias/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/colores.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilosPersonalizados.css')}}">
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
@@ -32,12 +32,13 @@
                         class="logo">
                     </div>
                     <div class="form-group col-12">
-                        <label for="Nombre de usuario">Usuario o correo electrónico:</label>
+                        <label for="Nombre de usuario">Nombre de usuario o correo electrónico:</label>
                         <input 
                         type="text"
                         class="form-control" 
                         id="correoUsuario" 
-                        name="correoUsuario">
+                        name="correoUsuario"
+                        placeholder="usuario/email">
                     </div>
                     <div class="form-group col-12">
                         <label for="Contraseña">Contraseña:</label>
