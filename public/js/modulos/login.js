@@ -4,12 +4,14 @@ window.addEventListener("DOMContentLoaded", function(){
     $(document).on("click", ".btnAcceder", function() {
 
         var frmLogin = $("#frmLogin").serialize();
+        recetearCamposValidaciones("#frmLogin");
 
         $.ajax({
 
             url:"/iniciar/sesion",
             data: frmLogin,
             method:"POST",
+            dataType:"JSON",
             success:function(data){
                 
                 try {
@@ -18,8 +20,21 @@ window.addEventListener("DOMContentLoaded", function(){
                         throw data["mensaje"];
                     }
 
+                    if ( data["estado"] == "validaciones" ) {
+                        mostrarErrorValidaciones("frmLogin", data);
+                    }
+
+                    if( data["estado"] == true ) {
+                        window.location = "/";
+                    }
+
                 } catch (error) {
-                    alert(error);
+
+                    bootbox.alert({
+                        message: error,
+                        className: 'd-flex align-items-center'
+                    });
+
                 }
 
             }

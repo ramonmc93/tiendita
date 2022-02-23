@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Library\FuncionesGenerales;
 use App\Models\Administrador;
 use Illuminate\Support\Facades\DB;
 
-use Throwable;
+use App\Library\FuncionesGenerales;
 
 class AdministradorController extends Controller
 {
@@ -25,24 +24,29 @@ class AdministradorController extends Controller
     // --- Guardar administrador default.
     public function generarAdministradorDefault() {
         
+        $ruta = '/login';
+
         // --- Validar que el usuario no este registrado.
-        $administrador = DB::table('administradores')
+        $administradorRow = DB::table('administradores')
             ->select('idadministradores')
             ->where('idadministradores', '=', 1)
             ->where('estado', '=', 'A')
             ->get();
 
 
-        var_dump($administrador);
-        return;
-
-        $estadoGuardado = $this->administrador->generarAdministradorDefault();
+        $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
         
-        if ( $estadoGuardado ) {
-            return redirect('/admin/registrado');   
+        if ( empty($administradorRow[0]["idadministradores"]) ) {
+
+            $estadoGuardado = $this->administrador->generarAdministradorDefault();
+            
+            if ( $estadoGuardado ) {
+                $ruta = '/admin/registrado';
+            }
+
         }
         
-        echo "No fue posible registrar al usuario.";
+        return redirect($ruta);   
 
     }
 
@@ -54,6 +58,30 @@ class AdministradorController extends Controller
         $password = $request->password;
         $estado = 'A';
         
+        /**
+         * Validaciones
+         */
+        $arrayInputs = [
+            'correoUsuario' => $correoUsuario,
+            'password' => $password,
+        ];
+
+        $arrayValidations = [
+            'correoUsuario' => 'required',
+            'password' => 'required'
+        ];
+        
+        $validator = Validator::make($arrayInputs, $arrayValidations);
+        
+        if ( !$validator->passes() ) {
+            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r( json_encode( $estadoRespuesta ) );
+        }
+
+
+        /**
+         * Verificar que las credenciales del administrador existan.
+         */
         if ( !empty($correoUsuario) && !empty($password) ) {
             
             $usuarios = DB::select('SELECT idadministradores, passw, nombre, apellidopaterno, apellidomaterno FROM administradores 
@@ -75,13 +103,15 @@ class AdministradorController extends Controller
 
             }
 
-            // Si el password ingresado es correcto, se crean las variables de sesión y se guarda el token de sesión.
+            // Si el password ingresado es correcto, se crean las variables de sesión.
             if ( password_verify($password, $passwordConsulta) ) {
-                $this->modeloUsuario->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
-                return redirect('/');
+                $this->administrador->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
+                $arrayRespuestaLogin = ["estado" => true];
             } else {
-                print_r(json_encode(["estado" => false, "mensaje" => "Contraseña y/o usuarios ."]));
+                $arrayRespuestaLogin = ["estado" => false, "mensaje" => "La contraseña, correo y/o usuario son incorrectos."];
             }
+            
+            print_r(json_encode($arrayRespuestaLogin));
 
         }
 

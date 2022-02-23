@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <link rel="stylesheet" href="{{asset('css/librerias/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/colores.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilosPersonalizados.css')}}">
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
@@ -68,12 +69,19 @@
                     <div class="col-12 contenedorFooter">
                         <p class="mb-0"><a href="index.php">Volver a la página principal</a></p>
                     </div>
+                    <x-alerts.alertValidacioneForm/>
                 </form>
                 {{session('tokenUsuario')}}
             </article>
         </section>
     </main>
     <script src="{{asset('js/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    {{-- bootbox code --}}
+    <script src="{{asset('js/librerias/bootbox/dist/bootbox.min.js')}}"></script>
+    <script src="{{asset('js/librerias/bootbox/dist/bootbox.locales.min.js')}}"></script>
+    {{--bootbox code end --}}
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/modulos/login.js')}}"></script>
 </body>

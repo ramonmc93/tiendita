@@ -33,7 +33,7 @@
         }
 
         // --- Decodificar resultados de consulta devueltos.
-        public static function parsQuery($stmt){
+        public static function parseQuery($stmt){
             return json_decode(json_encode($stmt), 1);
         }
         

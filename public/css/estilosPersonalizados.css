@@ -1073,10 +1073,13 @@ label {
     position: absolute;
     right: -3px;
     top: -5px;
+    background-color: var(--colorPrimarioPrincipal)!important;
+    border-color: var(--colorPrimarioPrincipal)!important;
 }
 
 .btnCerrarNotificacion i {
     font-size: 12px;
+    color: #BDFFE6;
 }
 
 .notificacionesError {
@@ -1120,4 +1123,9 @@ label {
 
 .invalido {
     background-color: rgb(255, 190, 190);
+}
+
+/* Botbox */
+.bootbox-close-button.close {
+    display: none;
 }

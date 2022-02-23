@@ -182,6 +182,12 @@ return [
             'numeric' => 'El código postal es incorrecto.',
             'digits_between' => 'El código postal debe de tener una longitud máxima de 5 dígitos.',
         ],
+        'correoUsuario' => [
+            'required' => 'El correo o nombre de usuario es obligatorio.',
+        ],
+        'password' => [
+            'required' => 'La contraseña es obligatoria.',
+        ],
     ],
 
     /*

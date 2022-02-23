@@ -11,24 +11,17 @@ class Administrador extends Model
 {
     use HasFactory;
 
-    // public $administrador;
-    
-    // public function __construct() {
-    //     $this->administrador = new Administrador();
-    // }
-
-
     // --- Función para crear las variables de sesión.
-    public function loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador) {
+    public function loginCrearVariablesSesion($nombre, $apellidopaterno, $apellidomaterno, $idadministrador) {
         // Se almacenan los datos de la sesión.
-        session(['nombre' => $nombre, 'apellidoPaterno' => $apellidoPaterno, 'apellidoMaterno' => $apellidoMaterno, 'idAdministrador' => $idAdministrador]);
+        session(['nombre' => $nombre, 'apellidoPaterno' => $apellidopaterno, 'apellidoMaterno' => $apellidomaterno, 'idAdministrador' => $idadministrador]);
     }
 
 
     // --- Función para crear el usuario por default.
     public function generarAdministradorDefault() {
 
-        
+
         $nombre = "Super";
         $apellidopaterno = "Admin";
         $apellidomaterno = "Admin";
@@ -63,7 +56,7 @@ class Administrador extends Model
             'idusuarioregistro' => $idusuarioregistro
         ]);
 
-        loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
+        $this->loginCrearVariablesSesion($nombre, $apellidopaterno, $apellidomaterno, $idusuarioregistro);
 
         return $estadoConsulta;
         
@@ -84,7 +77,7 @@ class Administrador extends Model
         $fecharegistro = date("Y-m-d H:i:s");
         // $idusuarioregistro = $request->idAdministrador;
 
-        print_r(json_encode(array($nombre, $apellidoPaterno, $apellidoMaterno, $telCelular)));
+        // print_r(json_encode(array($nombre, $apellidoPaterno, $apellidoMaterno, $telCelular)));
         
     }
 
