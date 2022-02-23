@@ -128,14 +128,12 @@ class AdministradorController extends Controller
         $apellidoMaterno = trim($request->apellidoMaterno);
         $telCelular = trim($request->telCelular);
         $telCasa = trim($request->telCasa);
+        $tipoUsuario = trim($request->tipoUsuario);
         $email = trim($request->email);
         $fechaNacimiento = trim($request->fechaNacimiento);
         $direccion = trim($request->direccion);
         $codigoPostal = trim($request->codigoPostal);
         $idAdministrador = trim($request->idAdministrador);
-
-        // var_dump($telCelular);
-        // return;
 
         // ---- Validaciones
         $arrayInputs = [
@@ -163,17 +161,40 @@ class AdministradorController extends Controller
             $arrayValidations['telCasa'] = 'numeric|digits_between:10,10';
         }
 
+        /**
+         * Otras validaciones
+         */
+        // --- Validaciones if
+        $hayCampoInvalido = false;
+        $arrayOtrasValidaciones = array();
+        if ( $tipoUsuario != "SA" && $tipoUsuario != "A" ) {
+            $hayCampoInvalido = true;
+            $arrayOtrasValidaciones = array( "propiedadesName" => array("tipoUsuario") );
+        }
+
         $validator = Validator::make($arrayInputs, $arrayValidations);
 
         $estadoRespuesta = "";
         
-        if ( !$validator->passes() ) {
+        if ( !$validator->passes() || $hayCampoInvalido ) {
+            
             $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
-            print_r( json_encode( $estadoRespuesta ) );
+
+            /**
+            * Otras validaciones
+            */
+            if ( $hayCampoInvalido ) {  
+                $arrayOtrasValidaciones["textoValidacion"]["tipoUsuario"] = "El tipo de usuario es incorrecto, los valores permitidos son, SA y A";
+            }
+
+            print_r( json_encode( array( $estadoRespuesta, $arrayOtrasValidaciones ) ) );
+
         }
 
         // --- Gurdar administrador.
-        Administrador::guardarAdministrador($request);
+        // $estadoOperacion = Administrador::guardarAdministrador($request);
+
+        // var_dump($estadoOperacion);
 
     }
 

@@ -73,7 +73,7 @@
                             <div class="col-12 col-md-4">
                                 <label for="nombre">Nombre:</label>
                                 <input 
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="nombre">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
@@ -81,7 +81,7 @@
                             <div class="col-12 col-md-4">
                                 <label for="apellidoPaterno">Apellido paterno:</label>
                                 <input 
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="apellidoPaterno">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
@@ -98,7 +98,7 @@
                             <div class="col-12 col-md-4">
                                 <label for="telCelular">Teléfono celular:</label>
                                 <input 
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="telCelular">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
@@ -106,14 +106,14 @@
                             <div class="col-12 col-md-4">
                                 <label for="telCasa">Teléfono casa:</label>
                                 <input
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="telCasa">
                             </div>
                             <div class="col-12 col-md-4">
                                 <label for="email">Email:</label>
                                 <input 
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="email" 
                                 name="email">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
@@ -124,7 +124,7 @@
                                 <label for="fechaNacimiento">Fecha de nacimiento:</label>                                
                                 <div class="input-group date" id="fechaNacimiento" data-target-input="nearest">
                                     <input 
-                                    class="form-control datetimepicker-input"
+                                    class="form-control datetimepicker-input obligatorio"
                                     type="text" 
                                     name="fechaNacimiento"
                                     data-target="#fechaNacimiento"
@@ -143,7 +143,7 @@
                             <div class="col-12 col-md-4">
                                 <label for="direccion">Dirección:</label>
                                 <textarea
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="direccion"
                                 rows="10"></textarea>
@@ -152,9 +152,38 @@
                             <div class="col-12 col-md-4">
                                 <label for="codigoPostal">Código postal:</label>
                                 <input 
-                                class="form-control"
+                                class="form-control obligatorio"
                                 type="text" 
                                 name="codigoPostal">
+                                <span class="campoObligatorio">Este campo es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-4">
+                                <label for="tipoAdministrador">Tipo de administrador:</label>                                
+                                <div class="form-check">
+                                    <input 
+                                    class="form-check-input obligatorio" 
+                                    type="radio" 
+                                    value="Ad" 
+                                    id="tipoAdministrador"
+                                    name="tipoUsuario"
+                                    checked="checked">
+                                    <label class="form-check-label" for="tipoAdministrador">
+                                        Administrador
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    value="SA" 
+                                    id="tipoSuperAdministrador"
+                                    name="tipoUsuario">
+                                    <label class="form-check-label" for="tipoSuperAdministrador">
+                                        Superadministrador
+                                    </label>
+                                </div>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                         </div>

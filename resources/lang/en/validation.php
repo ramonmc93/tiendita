@@ -187,7 +187,7 @@ return [
         ],
         'password' => [
             'required' => 'La contraseña es obligatoria.',
-        ],
+        ]
     ],
 
     /*

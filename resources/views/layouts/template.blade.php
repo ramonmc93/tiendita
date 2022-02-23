@@ -1,4 +1,11 @@
-@if ( 1 == 1 )
+@php
+    // --- Variables de sesión.
+    $nombre = session('nombre');
+    $apellidoPaterno = session('apellidoPaterno');
+    $apellidoMaterno = session('apellidoMaterno');
+    $idAdministrador = session('idAdministrador');
+@endphp
+@if ( !empty($idAdministrador) )
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -31,7 +38,7 @@
                         <p class="m-b-0 text-center">LajitaShop</p>
                     </div>
                 </article>
-                @if ( $nombreVista == "/" )
+                @if ( $nombreVista == "index" )
                     <article class="contenedorBuscadorFiltros container">
                         <div class="row ml-0">
                             <label for="buscador" class="colorLetraBlanco-n font-we-300">Filtro de búsqueda:</label>
@@ -56,7 +63,7 @@
         <article class="menu">
             <nav>
                 <ul>
-                    @if ( session('idadministradores') )
+                    @if ( !empty($idAdministrador) )
 
                         <li>
                             <a href="#" class="cerrarSesion">Cerrar sesión</a>
@@ -68,14 +75,14 @@
                             </li>
                         @endif
 
-                        @if ( $nombreVista != "index" )
+                        @if ( $nombreVista != "modulos.producto" )
                             <li>
                                 <a href="/modulos/productos">Módulo de productos</a>
                             </li>
                         @endif
 
                     @endif
-                    @if ( empty(session('idadministradores')) )
+                    @if ( empty($idAdministrador) )
                         <li>
                             <a href="/login" class="cerrarSesion">Iniciar sesión</a>
                         </li>   

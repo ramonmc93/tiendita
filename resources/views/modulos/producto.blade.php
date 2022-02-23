@@ -19,7 +19,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Ramón Martínez Cruz</td>
+                                <td>Jabón blacanieves</td>
                                 <td>
                                     <button 
                                     type="button" 

@@ -36,7 +36,7 @@
                         <label for="Nombre de usuario">Nombre de usuario o correo electrónico:</label>
                         <input 
                         type="text"
-                        class="form-control" 
+                        class="form-control obligatorio" 
                         id="correoUsuario" 
                         name="correoUsuario"
                         placeholder="usuario/email">
@@ -45,12 +45,12 @@
                         <label for="Contraseña">Contraseña:</label>
                         <input 
                         type="password" 
-                        class="form-control" 
+                        class="form-control obligatorio" 
                         id="password" 
                         name="password">
                         <button 
                         type="button" 
-                        class="btn-ct-inp d-flex-center borderNBR btnPrimero btnMostrarPassword d-none" 
+                        class="btn-ct-inp d-flex-center borderNBR btnPrimero btnMostrarPassword" 
                         data-input-name="password" 
                         data-ocultar-password="false">
                             <li class="ico-ojo esclerotica d-flex-center">

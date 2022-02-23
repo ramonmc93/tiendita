@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function(){
                 dataType:"JSON",
                 success:function(data){
                     
-                    if ( data["estado"] == "validaciones" ) {
+                    if ( data[0]["estado"] == "validaciones" ) {
                         mostrarErrorValidaciones("frmAdministradores", data);
                     }
 

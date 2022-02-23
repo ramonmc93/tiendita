@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function(){
                         throw data["mensaje"];
                     }
 
-                    if ( data["estado"] == "validaciones" ) {
+                    if ( data[0]["estado"] == "validaciones" ) {
                         mostrarErrorValidaciones("frmLogin", data);
                     }
 

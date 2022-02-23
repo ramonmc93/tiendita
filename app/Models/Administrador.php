@@ -66,19 +66,32 @@ class Administrador extends Model
     public static function guardarAdministrador($request) {
 
         $nombre = $request->nombre;
-        $apellidopaterno = $request->apellidoPaterno;
-        $apellidomaterno = $request->apellidoMaterno;
-        $fechanacimiento = $request->fechaNacimiento;
+        $apellidoPaterno = $request->apellidoPaterno;
+        $apellidoMaterno = $request->apellidoMaterno;
+        $fechaNacimiento = $request->fechaNacimiento;
         $direccion = $request->direccion;
-        $codigopostal = $request->codigoPostal;
-        $telcelular = $request->telCelular;
-        $telcasa = $request->telCasa;
+        $codigoPostal = $request->codigoPostal;
+        $telCelular = $request->telCelular;
+        $telCasa = $request->telCasa;
         $email = $request->email;
-        $fecharegistro = date("Y-m-d H:i:s");
-        $fecharegistro = date("Y-m-d H:i:s");
-        // $idusuarioregistro = $request->idAdministrador;
+        $fechaRegistro = date("Y-m-d H:i:s");
+        $idUsuarioRegistro = session('idAdministrador');
 
-        // print_r(json_encode(array($nombre, $apellidoPaterno, $apellidoMaterno, $telCelular)));
+        $estadoOperacion = DB::table('administradores')->insert([
+            'nombre' => $nombre,
+            'apellidopaterno' => $apellidoPaterno,
+            'apellidomaterno' => $apellidoMaterno,
+            'fechanacimiento' => $fechaNacimiento,
+            'direccion' => $direccion,
+            'codigopostal' => $codigoPostal,
+            'telcelular' => $telCelular,
+            'telcasa' => $telCasa,
+            'email' => $email,
+            'fecharegistro' => $fechaRegistro,
+            'idusuarioregistro' => $idUsuarioRegistro,
+        ]);
+
+        return $estadoOperacion;
         
     }
 

@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
 function obtenerPropiedadNameCamposFormularios(idFormulario) {
 
     var arrayPropiedadName = [];
-    $("#"+idFormulario+" input[type='text'], input[type='email'], input[type='password'], textarea").each(function(i, j){
+    $("#"+idFormulario+" .obligatorio").each(function(i, j){
         arrayPropiedadName[i] = j.name;
     });
 
@@ -44,17 +44,24 @@ function mostrarErrorValidaciones( frm = "", data ) {
 
     if ( frm != "" ) {
 
-        console.log(data);
-
         let arrayPropiedadName = obtenerPropiedadNameCamposFormularios(frm);
         let notificacionesError = $(".notificacionesError ");
         let contenedorNotificaciones = $(".contenedorNotificaciones");
         let hayValidaciones = false;
-    
+        
+        // --- Otras validaciones.
+        let otrasValidaciones = data[1].propiedadesName;
+        if ( otrasValidaciones != undefined ) {
+            let validacionIniciales = data[0].validaciones;
+            for (let name of otrasValidaciones) {
+                data[0].validaciones[name] = [ data[1].textoValidacion[name] ];
+            }
+        }
+        
         for ( let propName of arrayPropiedadName ) {   
     
-            let validacion = data.validaciones[propName];     
-            let campoActual = $("*[name='"+propName+"']")[0];
+            let validacion = data[0].validaciones[propName];     
+            let campoActual = $("*[name='"+propName+"']");
     
             if ( validacion != undefined ) {            
     
@@ -65,16 +72,22 @@ function mostrarErrorValidaciones( frm = "", data ) {
                 contenedorValidacion.append(span);
                 span.before(i);
                 contenedorNotificaciones.append(contenedorValidacion);          
-                campoActual.classList.add("invalido");
+                campoActual[0].classList.add("invalido");
     
                 hayValidaciones = true;
+
+                if ( campoActual[0].type == "radio" || campoActual[0].type == "checkbox" ) {
+                    let padreElemento = campoActual.parent().parent()[0];
+                    padreElemento.classList.add("invalido");
+                }
     
             } else {
-                campoActual.classList.remove("invalido");
+                campoActual[0].classList.remove("invalido");
             }                    
     
         }
-    
+        
+        // --- Si hay errores se muestra la alerta.
         if ( hayValidaciones ) {
             notificacionesError.removeClass("d-none").addClass("d-block");
         }
