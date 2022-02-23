@@ -96,22 +96,7 @@
                 @yield('content-tabla-modulo')
             </section>
             {{-- Butones de acción módulo. --}}
-            @php
-                if ( empty($identificadorBoton) ):
-                    $identificadorAccion = "";
-                    $identificadorBoton = "";
-                endif;  
-            @endphp 
-            @if ( $nombreVista != "adminRegistradoCorrectamente" )
-                <button
-                type="button"
-                class="btn-flotante {{$identificadorBoton}}" 
-                data-bs-toggle="modal" 
-                data-bs-target="#modalAdmnistradores"
-                title="Agregar nuevo {{$identificadorAccion}}">
-                    <img src="{{asset('imagenes/botones/agregar.svg')}}" alt="Agregar nuevo {{$identificadorAccion}}">
-                </button>
-            @endif
+            @yield('contenedor-boton-flotante-agregar')
         </main>
         
         <footer>

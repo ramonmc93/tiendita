@@ -17,7 +17,7 @@ class AdministradorController extends Controller
 
     public function __construct() {
         $this->funcionesGenerales = new FuncionesGenerales();
-        $this->administrador = new Administrador();
+        $this->modeloAdministrador = new Administrador();
     }
 
 
@@ -38,12 +38,14 @@ class AdministradorController extends Controller
         
         if ( empty($administradorRow[0]["idadministradores"]) ) {
 
-            $estadoGuardado = $this->administrador->generarAdministradorDefault();
+            $estadoGuardado = $this->modeloAdministrador->generarAdministradorDefault();
             
             if ( $estadoGuardado ) {
                 $ruta = '/admin/registrado';
             }
 
+        } else {
+            $ruta = '/';
         }
         
         return redirect($ruta);   
@@ -105,7 +107,7 @@ class AdministradorController extends Controller
 
             // Si el password ingresado es correcto, se crean las variables de sesión.
             if ( password_verify($password, $passwordConsulta) ) {
-                $this->administrador->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
+                $this->modeloAdministrador->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
                 $arrayRespuestaLogin = ["estado" => true];
             } else {
                 $arrayRespuestaLogin = ["estado" => false, "mensaje" => "La contraseña, correo y/o usuario son incorrectos."];

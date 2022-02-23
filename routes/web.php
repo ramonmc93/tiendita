@@ -26,6 +26,9 @@ Route::get('/template', function () {
     return view('layouts/template');
 });
 
+// --- Administrador default.
+Route::get('/admin-default', [AdministradorController::class, 'generarAdministradorDefault']);
+
 Route::get('/admin/registrado', function() {
     return view("adminRegistradoCorrectamente");
 });
@@ -34,22 +37,29 @@ Route::get('/admin/registrado', function() {
 /**
  * Login
  */
+Route::post('/iniciar/sesion', [AdministradorController::class, 'loginValidacion']);
+
 Route::get('/login', function(){
     return view("login");
-});
+})->middleware(['mostrar-modulo-productos']);
 
-Route::post('/iniciar/sesion', [AdministradorController::class, 'loginValidacion']);
 
 
 /**
  * Módulos administradores
  */
 
-// --- Administrador default.
-Route::get('/admin-default', [AdministradorController::class, 'generarAdministradorDefault']);
+ // ---- Asignación de middleware.
+Route::middleware(['existe-sesion-activa'])->group(function () {
+    
+    Route::get('/modulos/administradores', function() {
+        return view("modulos.administrador");
+    });
 
-Route::get('/modulos/administradores', function() {
-    return view("modulos.administrador");
+    Route::get('/modulos/productos', function() {
+        return view("modulos.producto");
+    });
+    
 });
 
 Route::post('/administradores/guardar-modificar', [AdministradorController::class, 'guardarAdministrador']);

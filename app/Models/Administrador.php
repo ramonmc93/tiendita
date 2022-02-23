@@ -56,6 +56,7 @@ class Administrador extends Model
             'idusuarioregistro' => $idusuarioregistro
         ]);
 
+        // --- Se crean las variables de sesión.
         $this->loginCrearVariablesSesion($nombre, $apellidopaterno, $apellidomaterno, $idusuarioregistro);
 
         return $estadoConsulta;

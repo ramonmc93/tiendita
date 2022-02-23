@@ -69,6 +69,7 @@
                     <div class="col-12 contenedorFooter">
                         <p class="mb-0"><a href="index.php">Volver a la página principal</a></p>
                     </div>
+                    {{-- Componente alert para mostrar información correspondiente a las validaciones. --}}
                     <x-alerts.alertValidacioneForm/>
                 </form>
                 {{session('tokenUsuario')}}

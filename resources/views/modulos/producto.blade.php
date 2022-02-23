@@ -1,11 +1,6 @@
-@php
-    $claseBotonFlotanteAgregar = "btnAgregarAdministrador";
-    $identificadorAccion = "administrador";
-@endphp
-
 @extends('layouts.template')
     
-    @section('title-module', 'Lista de administradores registrados')
+    @section('title-module', 'Lista de productos registrados')
     
         @section('content-tabla-modulo')
 
@@ -30,7 +25,7 @@
                                     type="button" 
                                     class="btn btn-primary btnConsultar"
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#modalAdmnistrador">
+                                    data-bs-target="#modalProducto">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </td>
@@ -39,7 +34,7 @@
                                     type="button" 
                                     class="btn btn-primary btnEditar"
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#modalAdmnistrador">
+                                    data-bs-target="#modalProducto">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
@@ -56,14 +51,14 @@
                 </div>
             </article>
 
-        {{-- Modal administrador nuevo/editar --}}
+        {{-- Modal producto nuevo/editar --}}
         @php    
-            $tituloModal = "Administrador nuevo/editar";
+            $tituloModal = "Producto nuevo/editar";
             $idFormularioModulo = "frmAdministradores";
-            $nameIdAdministrador = "idAdministrador";
+            $nameIdProducto = "idProducto";
         @endphp
         <x-modal
-        id="modalAdmnistrador"
+        id="modalProducto"
         :titulo-modal="$tituloModal">
             @section('contenido-modal')
                 <form id="{{$idFormularioModulo}}">
@@ -161,7 +156,7 @@
                     </div>
                     <input 
                     type="hidden"
-                    name="{{$nameIdAdministrador}}">
+                    name="{{$nameIdProducto}}">
                 </form>
                 {{-- Componente alert para mostrar información correspondiente a las validaciones. --}}
                 <x-alerts.alertValidacioneForm/>
@@ -171,16 +166,16 @@
         {{-- Butones flotantes de acción módulo. --}}
         @section('contenedor-boton-flotante-agregar')     
             @php
-                $claseBotonFlotanteAgregar = "btnAgregarAdministrador";
-                $idModal = "#modalAdmnistrador";
-                $identificadorAccion = "administrador";
+                $claseBotonFlotanteAgregar = "btnAgregarProducto";
+                $idModal = "#modalProducto";
+                $identificadorAccion = "producto";
             @endphp 
             <x-buttons.botonFlotanteAgregar
             :clase-boton-flotante-agregar="$claseBotonFlotanteAgregar"
             :id-modal="$idModal"
             :identificador-accion="$identificadorAccion"/>
         @endsection
-        
+            
     @endsection
 
     {{-- Scripts módulos/otros --}}
