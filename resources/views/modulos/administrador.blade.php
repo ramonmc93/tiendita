@@ -10,6 +10,9 @@
         @section('content-tabla-modulo')
 
             <article class="w-p-90 mt-4 row justify-content-center">
+                <button 
+                type="button"
+                class="btn btn-primary btnActualizarTabla">Actualizar</button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

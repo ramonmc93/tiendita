@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{asset('css/librerias/bootstrap/dist/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/plugins/fontawesome/css/font-awesome.min.css')}}">
         @yield('estilos-modulos-otros')
+        <link rel="stylesheet" href="{{asset('js/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/colores.css')}}">
         <link rel="stylesheet" href="{{asset('css/estilosPersonalizados.css')}}">
         <link rel="stylesheet" href="{{asset('css/estilosCard.css')}}">
@@ -120,6 +121,7 @@
         <script src="{{asset('js/plugins/popper/popper.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/plugins/datatables.net-bs5/js/dataTables.bootstrap5.js')}}"></script>
         {{-- bootbox code --}}
         <script src="{{asset('js/librerias/bootbox/dist/bootbox.min.js')}}"></script>
         <script src="{{asset('js/librerias/bootbox/dist/bootbox.locales.min.js')}}"></script>

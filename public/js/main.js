@@ -95,3 +95,22 @@ function mostrarErrorValidaciones( frm = "", data ) {
     }
 
 }
+
+
+// --- Mostrar notificación/mensaje de error
+function mostrarMensajeError( mensaje = "" ) {
+
+    let notificacionesError = $(".notificacionesError ");
+    notificacionesError.removeClass("d-none").addClass("d-block");
+
+    let contenedorValidacion = $("<div>", {class:"d-flex"});
+    let span = $("<span>", {text:mensaje, class:"ml5"});  
+    let i = $("<i>", {class:"fa fa-times"});
+    
+    contenedorValidacion.append(span);
+    span.before(i);
+
+    let contenedorNotificaciones = $(".contenedorNotificaciones");
+    contenedorNotificaciones.append(contenedorValidacion);          
+    
+}

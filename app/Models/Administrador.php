@@ -21,39 +21,38 @@ class Administrador extends Model
     // --- Función para crear el usuario por default.
     public function generarAdministradorDefault() {
 
-
         $nombre = "Super";
-        $apellidopaterno = "Admin";
-        $apellidomaterno = "Admin";
-        $fechanacimiento = date("Y-m-d H:i:s");
+        $apellidoPaterno = "Admin";
+        $apellidoMaterno = "Admin";
+        $fechaNacimiento = date("Y-m-d H:i:s");
         $direccion = "cloud";
-        $codigopostal = "01010";
-        $telcelular = "01111011101";
-        $telcasa = "11111011101";
-        $tipousuario = "SA";
+        $codigoPostal = "01010";
+        $telCelular = "01111011101";
+        $telCasa = "11111011101";
+        $tipoUsuario = "SA";
         $email = "127.0.0.1@gmail.com";
         $passw = password_hash("@123_", PASSWORD_DEFAULT);
-        $nombreusuario = "superadmin";
-        $fecharegistro = date("Y-m-d H:i:s");
+        $nombreUsuario = "superadmin";
+        $fechaRegistro = date("Y-m-d H:i:s");
         $estado = "A";
-        $idusuarioregistro = 1;
+        $idUsuarioRegistro = 1;
 
         $estadoConsulta = DB::table('administradores')->insert([
             'nombre' => $nombre,
-            'apellidopaterno' => $apellidopaterno,
-            'apellidomaterno' => $apellidomaterno,
-            'fechanacimiento' => $fechanacimiento,
+            'apellidopaterno' => $apellidoPaterno,
+            'apellidomaterno' => $apellidoMaterno,
+            'fechanacimiento' => $fechaNacimiento,
             'direccion' => $direccion,
-            'codigopostal' => $codigopostal,
-            'telcelular' => $telcelular,
-            'telcasa' => $telcasa,
-            'tipousuario' => $tipousuario,
+            'codigopostal' => $codigoPostal,
+            'telcelular' => $telCelular,
+            'telcasa' => $telCasa,
+            'tipousuario' => $tipoUsuario,
             'email' => $email,
             'passw' => $passw,
-            'nombreusuario' => $nombreusuario,
-            'fecharegistro' => $fecharegistro,
+            'nombreusuario' => $nombreUsuario,
+            'fecharegistro' => $fechaRegistro,
             'estado' => $estado,
-            'idusuarioregistro' => $idusuarioregistro
+            'idusuarioregistro' => $idUsuarioRegistro
         ]);
 
         // --- Se crean las variables de sesión.
@@ -68,13 +67,17 @@ class Administrador extends Model
         $nombre = $request->nombre;
         $apellidoPaterno = $request->apellidoPaterno;
         $apellidoMaterno = $request->apellidoMaterno;
-        $fechaNacimiento = $request->fechaNacimiento;
+        $fechaNacimiento = date("Y-m-d", strtotime($request->fechaNacimiento));
         $direccion = $request->direccion;
         $codigoPostal = $request->codigoPostal;
         $telCelular = $request->telCelular;
         $telCasa = $request->telCasa;
+        $tipoUsuario = $request->tipoUsuario;
         $email = $request->email;
+        $passw = "";
+        $nombreUsuario = "";
         $fechaRegistro = date("Y-m-d H:i:s");
+        $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
         $estadoOperacion = DB::table('administradores')->insert([
@@ -86,8 +89,12 @@ class Administrador extends Model
             'codigopostal' => $codigoPostal,
             'telcelular' => $telCelular,
             'telcasa' => $telCasa,
+            'tipousuario' => $tipoUsuario,
             'email' => $email,
+            'passw' => $passw,
+            'nombreusuario' => $nombreUsuario,
             'fecharegistro' => $fechaRegistro,
+            'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
         ]);
 

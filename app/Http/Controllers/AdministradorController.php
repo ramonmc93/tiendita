@@ -150,7 +150,7 @@ class AdministradorController extends Controller
             'nombre' => 'required|min:3|max:25',
             'apellidoPaterno' => 'required|min:3|max:25',
             'telCelular' => 'required|numeric|digits_between:10,10',
-            'email' => 'required|email|unique:administradores',
+            'email' => 'required|email',
             'fechaNacimiento' => 'required|date',
             'direccion' => 'required|min:15',
             'codigoPostal' => 'required|numeric|digits_between:5,5'
@@ -172,6 +172,9 @@ class AdministradorController extends Controller
             $arrayOtrasValidaciones = array( "propiedadesName" => array("tipoUsuario") );
         }
 
+        /**
+         * Validaciones generales.
+         */
         $validator = Validator::make($arrayInputs, $arrayValidations);
 
         $estadoRespuesta = "";
@@ -189,13 +192,45 @@ class AdministradorController extends Controller
 
             print_r( json_encode( array( $estadoRespuesta, $arrayOtrasValidaciones ) ) );
 
+        } else {
+
+            // --- Validar que el correo no exista.
+            $administradorRow = DB::table('administradores')
+                ->select('idadministradores')
+                ->where('email', '=', $email)
+                ->where('estado', '=', 'A')
+                ->get();
+    
+            $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
+            if ( !empty($administradorRow[0]["idadministradores"]) ) {
+                print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que está intentando registrar ya existe." ) ) );
+                return;
+            }
+            
+            // --- Gurdar administrador.
+            $estadoOperacion = Administrador::guardarAdministrador($request);
+            if ( $estadoOperacion ) {
+                print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
+            }
+
         }
 
-        // --- Gurdar administrador.
-        // $estadoOperacion = Administrador::guardarAdministrador($request);
+    }
 
-        // var_dump($estadoOperacion);
+
+    // --- Función para obtener los datos de los administradores.
+    public function obtenerDatosAdministradores() {
+        
+        // --- Validar que el correo no exista.
+        $administradorRows = DB::table('administradores')
+        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
+        ->where('estado', '=', 'A')
+        ->get();
+
+        $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);
+        print_r(json_encode($administradorRows));
 
     }
+
 
 }

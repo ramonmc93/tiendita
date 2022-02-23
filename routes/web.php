@@ -59,6 +59,8 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
     Route::get('/modulos/productos', function() {
         return view("modulos.producto");
     });
+
+    Route::post('/administradores/datos', [AdministradorController::class, 'obtenerDatosAdministradores']);
     
 });
 

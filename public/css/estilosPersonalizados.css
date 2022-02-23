@@ -1056,12 +1056,12 @@ label {
     border-color: var(--colorPrimarioPrincipal);
 }
 
-.btnEditar, .btnGuardarActualizar {
+.btnEditar, .btnGuardarActualizar, .bootbox-accept {
     background-color: var(--colorSecundarioSegundo);
     border-color: var(--colorSecundarioSegundo);
 }
 
-.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus {
+.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus, .bootbox-accept:hover, .bootbox-accept:focus {
     background-color: var(--colorSecundarioPrincipal);
     border-color: var(--colorSecundarioPrincipal);
 }
