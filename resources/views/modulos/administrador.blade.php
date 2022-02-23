@@ -120,7 +120,8 @@
                                     class="form-control datetimepicker-input"
                                     type="text" 
                                     name="fechaNacimiento"
-                                    data-target="#fechaNacimiento">
+                                    data-target="#fechaNacimiento"
+                                    placeholder="mm/dd/yyyy">
                                     <div 
                                     class="input-group-append" 
                                     data-target="#fechaNacimiento" 

@@ -146,6 +146,7 @@ return [
             'rule-name' => 'custom-message',
         ],
         'email' => [
+            'required' => 'El correo electrónico es obligatorio.',
             'email' => 'El correo electrónico es incorrecto.',
             'unique' => 'El email que esta intentando utilizar para el registro ya existe.'
         ],
@@ -160,10 +161,27 @@ return [
             'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
         ],
         'telCelular' => [
+            'required' => 'El teléfono celulular es obligatorio.',
             'numeric' => 'El teléfono celulular debe ser númerico de 10 dígitos.',
-            'min' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
-            'max' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
-        ]
+            'digits_between' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
+        ],
+        'telCasa' => [
+            'numeric' => 'El teléfono de casa debe ser númerico de 10 dígitos.',
+            'digits_between' => 'El teléfono de casa debe de tener una longitud máxima de 10 dígitos.',
+        ],
+        'fechaNacimiento' => [
+            'required' => 'La fecha de nacimiento es obligatoria.',
+            'date' => 'La fecha de nacimiento es incorrecta.',
+        ],
+        'direccion' => [
+            'required' => 'La dirección es obligatoria.',
+            'min' => 'La dirección debe de tener una longitud mínima de 15 caracteres.',
+        ],
+        'codigoPostal' => [
+            'required' => 'El código postal es obligatorio.',
+            'numeric' => 'El código postal es incorrecto.',
+            'digits_between' => 'El código postal debe de tener una longitud máxima de 5 dígitos.',
+        ],
     ],
 
     /*

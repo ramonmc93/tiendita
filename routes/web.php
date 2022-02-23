@@ -14,6 +14,10 @@ use App\Http\Controllers\AdministradorController;
 |
 */
 
+
+/**
+ * Template e index.
+ */
 Route::get('/', function () {
     return view('index');
 });
@@ -22,8 +26,27 @@ Route::get('/template', function () {
     return view('layouts/template');
 });
 
-// ---- Módulo administradores
-Route::get('/modulos/administradores', function(){
+Route::get('/admin/registrado', function() {
+    return view("adminRegistradoCorrectamente");
+});
+
+
+/**
+ * Login
+ */
+Route::get('/login', function(){
+    return view("login");
+});
+
+
+/**
+ * Módulos administradores
+ */
+
+// --- Administrador default.
+Route::get('/admin-default', [AdministradorController::class, 'generarAdministradorDefault']);
+
+Route::get('/modulos/administradores', function() {
     return view("modulos.administrador");
 });
 

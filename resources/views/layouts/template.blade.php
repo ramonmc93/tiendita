@@ -31,22 +31,24 @@
                         <p class="m-b-0 text-center">LajitaShop</p>
                     </div>
                 </article>
-                <article class="contenedorBuscadorFiltros container">
-                    <div class="row ml-0">
-                        <label for="buscador" class="colorLetraBlanco-n font-we-300">Filtro de búsqueda:</label>
-                        <div class="input-group mb-3">
-                            <div class="form-group col-12 col-lg-6 d-flex">
-                                <input type="text" class="form-control" name="textoBuscar">
-                                <div class="contenedorBotonBuscarFiltros">
-                                    <button class="btn btn-primary d-flex btnBuscarFiltroBusqueda" type="button">
-                                        <img src="{{ asset('imagenes/botones/lupa.svg') }}" alt="Buscar producto" class="lupaBuscador">
-                                        Buscar
-                                    </button>
+                @if ( $nombreVista == "/" )
+                    <article class="contenedorBuscadorFiltros container">
+                        <div class="row ml-0">
+                            <label for="buscador" class="colorLetraBlanco-n font-we-300">Filtro de búsqueda:</label>
+                            <div class="input-group mb-3">
+                                <div class="form-group col-12 col-lg-6 d-flex">
+                                    <input type="text" class="form-control" name="textoBuscar">
+                                    <div class="contenedorBotonBuscarFiltros">
+                                        <button class="btn btn-primary d-flex btnBuscarFiltroBusqueda" type="button">
+                                            <img src="{{ asset('imagenes/botones/lupa.svg') }}" alt="Buscar producto" class="lupaBuscador">
+                                            Buscar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                @endif
             </section>
         </header>
 
@@ -54,18 +56,29 @@
         <article class="menu">
             <nav>
                 <ul>
-                    <li>
-                        <a href="#" class="cerrarSesion">Cerrar sesión</a>
-                    </li>
-                    @if ( $nombreVista != "modulos.administrador" )
+                    @if ( session('idadministradores') )
+
                         <li>
-                            <a href="/modulos/administradores">Módulo de administradores</a>
+                            <a href="#" class="cerrarSesion">Cerrar sesión</a>
                         </li>
+
+                        @if ( $nombreVista != "modulos.administrador" )
+                            <li>
+                                <a href="/modulos/administradores">Módulo de administradores</a>
+                            </li>
+                        @endif
+
+                        @if ( $nombreVista != "index" )
+                            <li>
+                                <a href="/modulos/productos">Módulo de productos</a>
+                            </li>
+                        @endif
+
                     @endif
-                    @if ( $nombreVista != "index" )
+                    @if ( empty(session('idadministradores')) )
                         <li>
-                            <a href="/modulos/productos">Módulo de productos</a>
-                        </li>
+                            <a href="/login" class="cerrarSesion">Iniciar sesión</a>
+                        </li>   
                     @endif
                 </ul>
             </nav>
@@ -89,14 +102,16 @@
                     $identificadorBoton = "";
                 endif;  
             @endphp 
-            <button
-            type="button"
-            class="btn-flotante {{$identificadorBoton}}" 
-            data-bs-toggle="modal" 
-            data-bs-target="#modalAdmnistradores"
-            title="Agregar nuevo {{$identificadorAccion}}">
-                <img src="{{asset('imagenes/botones/agregar.svg')}}" alt="Agregar nuevo {{$identificadorAccion}}">
-            </button>
+            @if ( $nombreVista != "adminRegistradoCorrectamente" )
+                <button
+                type="button"
+                class="btn-flotante {{$identificadorBoton}}" 
+                data-bs-toggle="modal" 
+                data-bs-target="#modalAdmnistradores"
+                title="Agregar nuevo {{$identificadorAccion}}">
+                    <img src="{{asset('imagenes/botones/agregar.svg')}}" alt="Agregar nuevo {{$identificadorAccion}}">
+                </button>
+            @endif
         </main>
         
         <footer>
