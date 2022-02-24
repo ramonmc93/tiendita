@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,9 +72,6 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
 
 
     // --- Módulo productos
-    Route::get('/modulos/productos', [CategoriaController::class, 'obtenerDatosCategorias']);
-    Route::get('', function() {
-        return view("modulos.producto");
-    });
-
+    Route::get('/modulos/productos', [ProductoController::class, 'obtenerDatosProductos']);
+    
 });

@@ -22,100 +22,24 @@ class AdministradorController extends Controller
     }
 
 
-    // --- Guardar administrador default.
-    public function generarAdministradorDefault() {
-        
-        $ruta = '/login';
+    // --- Función para obtener los datos de los administradores.
+    public function obtenerDatosAdministradores( Request $request ) {
+    
+        $tipoPeticion = $request->tipoPeticion;
 
-        // --- Validar que el usuario no este registrado.
-        $administradorRow = DB::table('administradores')
-            ->select('idadministradores')
-            ->where('idadministradores', '=', 1)
-            ->where('estado', '=', 'A')
-            ->get();
+        $administradorRows = DB::table('administradores')
+        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
+        ->where('estado', '=', 'A')
+        ->orderBy('idadministradores', 'desc')
+        ->get();
 
+        $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);
 
-        $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
-        
-        if ( empty($administradorRow[0]["idadministradores"]) ) {
-
-            $estadoGuardado = $this->modeloAdministrador->generarAdministradorDefault();
-            
-            if ( $estadoGuardado ) {
-                $ruta = '/admin/registrado';
-            }
+        if ( $tipoPeticion == 'post' ) {
+            print_r(json_encode($administradorRows));
 
         } else {
-            $ruta = '/';
-        }
-        
-        return redirect($ruta);   
-
-    }
-
-
-    // --- Login, validación de credenciales.
-    public function loginValidacion(Request $request) {
-        
-        $correoUsuario = $request->correoUsuario;
-        $password = $request->password;
-        $estado = 'A';
-        
-        /**
-         * Validaciones
-         */
-        $arrayInputs = [
-            'correoUsuario' => $correoUsuario,
-            'password' => $password,
-        ];
-
-        $arrayValidations = [
-            'correoUsuario' => 'required',
-            'password' => 'required'
-        ];
-        
-        $validator = Validator::make($arrayInputs, $arrayValidations);
-        
-        if ( !$validator->passes() ) {
-            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
-            print_r( json_encode( $arrayEstadoRespuesta ) );
-        }
-
-
-        /**
-         * Verificar que las credenciales del administrador existan.
-         */
-        if ( !empty($correoUsuario) && !empty($password) ) {
-            
-            $usuarios = DB::select('SELECT idadministradores, passw, nombre, apellidopaterno, apellidomaterno FROM administradores 
-            WHERE (email = :email OR nombreusuario = :nombreusuario) AND estado = :estado', 
-            ['email' => $correoUsuario, 'nombreusuario' => $correoUsuario, 'estado' => $estado]);
-
-            $arrayDatosUsuarios = array();
-            $passwordConsulta = "";
-            $usuarioEstado = "";
-
-            if ( sizeof($usuarios) > 0 ) {
-
-                $arrayDatosUsuarios = json_decode(json_encode($usuarios), true)[0];
-                $passwordConsulta = $arrayDatosUsuarios["passw"];
-                $nombre = $arrayDatosUsuarios["nombre"];
-                $apellidoPaterno = $arrayDatosUsuarios["apellidopaterno"];
-                $apellidoMaterno = $arrayDatosUsuarios["apellidomaterno"];
-                $idAdministrador = $arrayDatosUsuarios["idadministradores"];
-
-            }
-
-            // Si el password ingresado es correcto, se crean las variables de sesión.
-            if ( password_verify($password, $passwordConsulta) ) {
-                $this->modeloAdministrador->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
-                $arrayRespuestaLogin = ["estado" => true];
-            } else {
-                $arrayRespuestaLogin = ["estado" => false, "mensaje" => "La contraseña, correo y/o usuario son incorrectos."];
-            }
-            
-            print_r(json_encode($arrayRespuestaLogin));
-
+            return view("modulos.administrador", ["administradorRows" => $administradorRows]);
         }
 
     }
@@ -252,29 +176,6 @@ class AdministradorController extends Controller
     }
 
 
-    // --- Función para obtener los datos de los administradores.
-    public function obtenerDatosAdministradores( Request $request ) {
-        
-        $tipoPeticion = $request->tipoPeticion;
-
-        $administradorRows = DB::table('administradores')
-        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
-        ->where('estado', '=', 'A')
-        ->orderBy('idadministradores', 'desc')
-        ->get();
-
-        $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);
-
-        if ( $tipoPeticion == 'post' ) {
-            print_r(json_encode($administradorRows));
-
-        } else {
-            return view("modulos.administrador", ["administradorRows" => $administradorRows ]);
-        }
-
-    }
-
-
     // --- Función para obtener la información del administrador seleccionado.
     public function obtenerDatosAdministrador( Request $request ) {
 
@@ -362,5 +263,104 @@ class AdministradorController extends Controller
 
     }
 
+
+    // --- Guardar administrador default.
+    public function generarAdministradorDefault() {
+        
+        $ruta = '/login';
+
+        // --- Validar que el usuario no este registrado.
+        $administradorRow = DB::table('administradores')
+            ->select('idadministradores')
+            ->where('idadministradores', '=', 1)
+            ->where('estado', '=', 'A')
+            ->get();
+
+
+        $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
+        
+        if ( empty($administradorRow[0]["idadministradores"]) ) {
+
+            $estadoGuardado = $this->modeloAdministrador->generarAdministradorDefault();
+            
+            if ( $estadoGuardado ) {
+                $ruta = '/admin/registrado';
+            }
+
+        } else {
+            $ruta = '/';
+        }
+        
+        return redirect($ruta);   
+
+    }
+
+
+    // --- Login, validación de credenciales.
+    public function loginValidacion(Request $request) {
+        
+        $correoUsuario = $request->correoUsuario;
+        $password = $request->password;
+        $estado = 'A';
+        
+        /**
+         * Validaciones
+         */
+        $arrayInputs = [
+            'correoUsuario' => $correoUsuario,
+            'password' => $password,
+        ];
+
+        $arrayValidations = [
+            'correoUsuario' => 'required',
+            'password' => 'required'
+        ];
+        
+        $validator = Validator::make($arrayInputs, $arrayValidations);
+        
+        if ( !$validator->passes() ) {
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r( json_encode( $arrayEstadoRespuesta ) );
+        }
+
+
+        /**
+         * Verificar que las credenciales del administrador existan.
+         */
+        if ( !empty($correoUsuario) && !empty($password) ) {
+            
+            $usuarios = DB::select('SELECT idadministradores, passw, nombre, apellidopaterno, apellidomaterno FROM administradores 
+            WHERE (email = :email OR nombreusuario = :nombreusuario) AND estado = :estado', 
+            ['email' => $correoUsuario, 'nombreusuario' => $correoUsuario, 'estado' => $estado]);
+
+            $arrayDatosUsuarios = array();
+
+            $passwordConsulta = "";
+            $usuarioEstado = "";
+
+            if ( sizeof($usuarios) > 0 ) {
+
+                $arrayDatosUsuarios = json_decode(json_encode($usuarios), true)[0];
+                $passwordConsulta = $arrayDatosUsuarios["passw"];
+                $nombre = $arrayDatosUsuarios["nombre"];
+                $apellidoPaterno = $arrayDatosUsuarios["apellidopaterno"];
+                $apellidoMaterno = $arrayDatosUsuarios["apellidomaterno"];
+                $idAdministrador = $arrayDatosUsuarios["idadministradores"];
+
+            }
+
+            // Si el password ingresado es correcto, se crean las variables de sesión.
+            if ( password_verify($password, $passwordConsulta) ) {
+                $this->modeloAdministrador->loginCrearVariablesSesion($nombre, $apellidoPaterno, $apellidoMaterno, $idAdministrador);
+                $arrayRespuestaLogin = ["estado" => true];
+            } else {
+                $arrayRespuestaLogin = ["estado" => false, "mensaje" => "La contraseña, correo y/o usuario son incorrectos."];
+            }
+            
+            print_r(json_encode($arrayRespuestaLogin));
+
+        }
+
+    }
 
 }

@@ -23,23 +23,23 @@ class ProductoController extends Controller
 
 
     // --- Función para obtener los datos de los administradores.
-    public function obtenerDatosAdministradores( Request $request ) {
+    public function obtenerDatosProductos( Request $request ) {
         
         $tipoPeticion = $request->tipoPeticion;
 
-        $administradorRows = DB::table('administradores')
-        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
+        $productoRows = DB::table('productos')
+        ->select('idproductos', 'nombre', 'precio', 'descuento', 'stock')
         ->where('estado', '=', 'A')
-        ->orderBy('idadministradores', 'desc')
+        ->orderBy('idproductos', 'desc')
         ->get();
 
-        $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);
+        $productoRows = $this->funcionesGenerales->parseQuery($productoRows);
 
         if ( $tipoPeticion == 'post' ) {
-            print_r(json_encode($administradorRows));
+            print_r(json_encode($productoRows));
 
         } else {
-            return view("modulos.administrador", ["administradorRows" => $administradorRows ]);
+            return view("modulos.producto", ["productoRows" => $productoRows]);
         }
 
     }

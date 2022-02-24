@@ -34,11 +34,11 @@
                             @php
                                 $index = 1;
                                 $hayProductos = true;
-                                if ( empty($productosRows) ) {
+                                if ( empty($productoRows) ) {
                                     $hayProductos = false;
                                 }
                             @endphp
-                            @foreach ($productosRows as $rowProducto)
+                            @foreach ($productoRows as $rowProducto)
                                 @php
                                     $nombreProducto = $rowProducto["nombre"];
                                     $precioProducto = $rowProducto["precio"];
@@ -81,7 +81,7 @@
                             @endforeach
                             @if ( !$hayProductos )
                                 <tr>
-                                    <td colspan="5" class="pb-0">
+                                    <td colspan="8" class="pb-0">
                                         <div class="alert alert-info text-center">No hay productos para mostrar.</div>
                                     </td>
                                 </tr>
@@ -239,8 +239,4 @@
     {{-- Scripts módulos/otros --}}
     @section('scripts-modulos-otros')
         <script src="{{asset('js/modulos/administradores.js')}}"></script>
-    @endsection
-
-    @section('estilos-modulos-otros')
-        <link rel="stylesheet" href="{{asset('js/plugins/tempusdominus/tempusdominus-bootstrap-4.min.css')}}">
     @endsection
