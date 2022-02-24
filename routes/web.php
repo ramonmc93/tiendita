@@ -61,6 +61,7 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
     // --- Módulo administradores
     Route::post('/administradores/datos', [AdministradorController::class, 'obtenerDatosAdministradores']);
     Route::post('/administrador/datos', [AdministradorController::class, 'obtenerDatosAdministrador']);
+    Route::post('/administrador/eliminar', [AdministradorController::class, 'eliminarAdministrador']);
 
 });
 

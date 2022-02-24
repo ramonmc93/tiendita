@@ -102,7 +102,7 @@ class Administrador extends Model
         
     }
 
-    public function actualizarAdministrador($request) {
+    public static function actualizarAdministrador($request) {
         
         $nombre = $request->nombre;
         $apellidoPaterno = $request->apellidoPaterno;
@@ -121,7 +121,9 @@ class Administrador extends Model
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
-        $estadoOperacion = DB::table('administradores')->update([
+        $estadoOperacion = DB::table('administradores')
+        ->where('idadministradores', '=', $idAdministradorConsulta)
+        ->update([
             'nombre' => $nombre,
             'apellidopaterno' => $apellidoPaterno,
             'apellidomaterno' => $apellidoMaterno,
@@ -137,11 +139,30 @@ class Administrador extends Model
             'fecharegistro' => $fechaRegistro,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
-        ])
-        ->where('idadministradores', $idAdministradorConsulta);
-            
+        ]);
+
         return $estadoOperacion;
         
     }
 
+
+    // --- Función para eliminar el administrador
+    public static function eliminarAdministrador($idAdministrador) {
+
+        $fechaActualizacion = date("Y-m-d H:i:s");
+        $estado = "E";
+        $idUsuarioElimino = session('idAdministrador');
+
+        $estadoOperacion = DB::table('administradores')
+        ->where('idadministradores', '=', $idAdministrador)
+        ->update([
+            'fechaactualizacion' => $fechaActualizacion,
+            'estado' => $estado,
+            'idusuarioelimino' => $idUsuarioElimino,
+        ]);
+
+        return $estadoOperacion;
+
+    }
+    
 }

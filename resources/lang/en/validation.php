@@ -187,6 +187,10 @@ return [
         ],
         'password' => [
             'required' => 'La contraseña es obligatoria.',
+        ],
+        'idAdministrador' => [
+            'required' => 'El administrador que esta intentando eliminar no existe.',
+            'gt' => 'El administrador que esta intentando eliminar no existe.'
         ]
     ],
 

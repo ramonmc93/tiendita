@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Administrador;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 use App\Library\FuncionesGenerales;
@@ -76,8 +77,8 @@ class AdministradorController extends Controller
         $validator = Validator::make($arrayInputs, $arrayValidations);
         
         if ( !$validator->passes() ) {
-            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
-            print_r( json_encode( $estadoRespuesta ) );
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r( json_encode( $arrayEstadoRespuesta ) );
         }
 
 
@@ -164,7 +165,6 @@ class AdministradorController extends Controller
         /**
          * Otras validaciones
          */
-        // --- Validaciones if
         $hayCampoInvalido = false;
         $arrayOtrasValidaciones = array();
         if ( $tipoUsuario != "SA" && $tipoUsuario != "A" ) {
@@ -177,11 +177,11 @@ class AdministradorController extends Controller
          */
         $validator = Validator::make($arrayInputs, $arrayValidations);
 
-        $estadoRespuesta = "";
+        $arrayEstadoRespuesta = array();
         
         if ( !$validator->passes() || $hayCampoInvalido ) {
             
-            $estadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
 
             /**
             * Otras validaciones
@@ -190,7 +190,7 @@ class AdministradorController extends Controller
                 $arrayOtrasValidaciones["textoValidacion"]["tipoUsuario"] = "El tipo de usuario es incorrecto, los valores permitidos son, SA y A";
             }
 
-            print_r( json_encode( array( $estadoRespuesta, $arrayOtrasValidaciones ) ) );
+            print_r( json_encode( array( $arrayEstadoRespuesta, $arrayOtrasValidaciones ) ) );
 
         } else {
 
@@ -202,13 +202,16 @@ class AdministradorController extends Controller
                 ->get();
     
             $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
-            $idAdministrador = $administradorRow[0]["idadministradores"];
+            $idAdministradorCorreo = "";
+            if ( !empty($administradorRow) ) {
+                $idAdministradorCorreo = $administradorRow[0]["idadministradores"];
+            }
             
             // --- Gurdar administrador.
             if ( empty($idAdministradorConsulta) ) {
 
                 // --- Validación correo electrónico.
-                if ( !empty($idAdministrador) ) {
+                if ( !empty($idAdministradorCorreo) ) {
                     print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
                     return;
                 }
@@ -216,7 +219,7 @@ class AdministradorController extends Controller
                 // ---- Guardado
                 $estadoOperacion = Administrador::guardarAdministrador($request);
                 if ( $estadoOperacion ) {
-                    print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
+                    print_r( json_encode( array( "estado" => 'registroActualizacionCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
                 }else {
                     $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible registrar el administrador, si el problema persiste contacte al administrador del sistema." );
                 }
@@ -224,15 +227,18 @@ class AdministradorController extends Controller
             } else {
 
                 // --- Validación correo electrónico.
-                if ( $idAdministrador != $idAdministradorConsulta ) {
-                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
+                // var_dump($idAdministrador, $idAdministradorConsulta, $email);
+                // return;
+
+                if ( !empty($idAdministradorCorreo) && $idAdministradorCorreo != $idAdministradorConsulta ) {
+                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando actualizar no esta disponible." ) ) );
                     return;
                 }
 
                 // --- Actualización administrador.
                 $estadoOperacion = Administrador::actualizarAdministrador($request);
                 if ( $estadoOperacion ) {
-                    $arrayRespuestadoOperacion = array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue actualizado correctamente." );
+                    $arrayRespuestadoOperacion = array( "estado" => 'registroActualizacionCorrecto', "mensaje" => "El administrador fue actualizado correctamente." );
                 } else {
                     $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible actualizar el administrador, si el problema persiste contacte al administrador del sistema." );
                 }
@@ -269,6 +275,7 @@ class AdministradorController extends Controller
 
     }
 
+
     // --- Función para obtener la información del administrador seleccionado.
     public function obtenerDatosAdministrador( Request $request ) {
 
@@ -284,6 +291,76 @@ class AdministradorController extends Controller
 
         $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
         print_r(json_encode($administradorRow));
+
+    }
+
+
+    // --- Eliminar administrador
+    public function eliminarAdministrador(Request $request) {
+
+        $idAdministrador = $request->idAdministrador;
+        $idAdministradorSesion = session('idAdministrador');
+
+        // ---- Validaciones
+        $arrayInputs = [
+            'idAdministrador' => $idAdministrador
+        ];
+
+        $arrayValidations = [
+            'idAdministrador' => 'required|gt:0'
+        ];
+
+        $validator = Validator::make($arrayInputs, $arrayValidations);
+        $arrayEstadoRespuesta = array();
+        if ( !$validator->passes() ) {
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+        
+        /**
+        * Otras validaciones
+        */
+        // ---- Validar que el administrador exista.
+        $administradorRows = DB::table('administradores')
+        ->select('idadministradores')
+        ->where('idadministradores', '=', $idAdministrador)
+        ->where('estado', '=', 'A')
+        ->get();
+
+        $idAdministradorConsulta = "";
+        $idAdministrador = $this->funcionesGenerales->parseQuery($administradorRows);
+        if ( !empty($idAdministrador[0]["idadministradores"]) ) {
+            $idAdministradorConsulta = $idAdministrador[0]["idadministradores"];
+        }
+
+        if ( empty($idAdministradorConsulta) ) {
+
+            $arrayTextoValidaciones["idAdministrador"][0] = "El administrador que esta intentando eliminar no existe.";
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $arrayTextoValidaciones];
+
+        } elseif( $idAdministradorConsulta == $idAdministradorSesion ) {
+
+            $arrayTextoValidaciones["idAdministrador"][0] = "No puede eliminarse así mismo, es necesario que otro administrador lo elimine.";
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $arrayTextoValidaciones];
+
+        }
+        
+        if ( !empty($arrayEstadoRespuesta) ) {
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+
+        // --- Se elimina
+        $estadoEliminacion = Administrador::eliminarAdministrador($idAdministrador);
+
+        if ( $estadoEliminacion ) {
+            $arrayEstadoRespuesta = ["estado" => true, "mensaje" => "Administrador eliminado correctamente."];
+        } else {
+            $arrayEstadoRespuesta = ["estado" => false, "mensaje" => "No se pudo eliminar el administrador, si el problema persiste contacte al administrador del sistema."];
+        }
+
+        print_r(json_encode($arrayEstadoRespuesta ));
 
     }
 
