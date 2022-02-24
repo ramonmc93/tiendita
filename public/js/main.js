@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 function obtenerPropiedadNameCamposFormularios(idFormulario) {
 
-    var arrayPropiedadName = [];
+    let arrayPropiedadName = [];
     $("#"+idFormulario+" .obligatorio").each(function(i, j){
         arrayPropiedadName[i] = j.name;
     });
@@ -40,7 +40,7 @@ function recetearCamposValidaciones( idFormulario = "" ) {
 }
 
 // --- Función para mostrar los errores de las validaciones del formulario correspondiente con los datos recividos.
-function mostrarErrorValidaciones( frm = "", data ) {
+function mostrarErrorValidaciones( frm = "", data, type = 0 ) {
 
     if ( frm != "" ) {
 
@@ -49,18 +49,26 @@ function mostrarErrorValidaciones( frm = "", data ) {
         let contenedorNotificaciones = $(".contenedorNotificaciones");
         let hayValidaciones = false;
         
+        if ( type == 0 ) {
+            var dataType0 = data[0];
+            var dataType1 = data[1];
+        } else {
+            var dataType0 = data;
+            var dataType1 = data;
+        }
+
         // --- Otras validaciones.
-        let otrasValidaciones = data[1].propiedadesName;
+        let otrasValidaciones = dataType1.propiedadesName;
         if ( otrasValidaciones != undefined ) {
-            let validacionIniciales = data[0].validaciones;
+            let validacionIniciales = dataType0.validaciones;
             for (let name of otrasValidaciones) {
-                data[0].validaciones[name] = [ data[1].textoValidacion[name] ];
+                dataType0.validaciones[name] = [ dataType1.textoValidacion[name] ];
             }
         }
         
         for ( let propName of arrayPropiedadName ) {   
     
-            let validacion = data[0].validaciones[propName];     
+            let validacion = dataType0.validaciones[propName];     
             let campoActual = $("*[name='"+propName+"']");
     
             if ( validacion != undefined ) {            

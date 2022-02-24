@@ -14,7 +14,7 @@ class AdministradorController extends Controller
 {
 
     private $funcionesGenerales;
-    public $administrador;
+    public $modeloAdministrador;
 
     public function __construct() {
         $this->funcionesGenerales = new FuncionesGenerales();
@@ -256,9 +256,7 @@ class AdministradorController extends Controller
     public function obtenerDatosAdministradores( Request $request ) {
         
         $tipoPeticion = $request->tipoPeticion;
-        $idAdministrador = $request->idAdministrador;
 
-        // --- Validar que el correo no exista.
         $administradorRows = DB::table('administradores')
         ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
         ->where('estado', '=', 'A')

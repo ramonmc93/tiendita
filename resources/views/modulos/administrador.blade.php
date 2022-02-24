@@ -1,6 +1,10 @@
 @php
     $claseBotonFlotanteAgregar = "btnAgregarAdministrador";
     $identificadorAccion = "administrador";
+    $idModal = "modalAdmnistrador";
+    $tituloModal = "Administrador nuevo/editar";
+    $idFormularioModulo = "frmAdministradores";
+    $inputHidenNameIdAdministrador = "idAdministradorConsulta";
 @endphp
 
 @extends('layouts.template')
@@ -27,6 +31,10 @@
                         <tbody>
                             @php
                                 $index = 1;
+                                $hayAdministradores = true;
+                                if ( empty($administradorRows) ) {
+                                    $hayAdministradores = false;
+                                }
                             @endphp
                             @foreach ($administradorRows as $rowAdministrador)
                                 @php
@@ -69,19 +77,21 @@
                                     $index++;
                                 @endphp
                             @endforeach
+                            @if ( !$hayAdministradores )
+                                <tr>
+                                    <td colspan="5" class="pb-0">
+                                        <div class="alert alert-info text-center">No hay administradores para mostrar.</div>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
             </article>
 
         {{-- Modal administrador nuevo/editar --}}
-        @php    
-            $tituloModal = "Administrador nuevo/editar";
-            $idFormularioModulo = "frmAdministradores";
-            $nameIdAdministrador = "idAdministrador";
-        @endphp
         <x-modal
-        id="modalAdmnistrador"
+        id="{{$idModal}}"
         :titulo-modal="$tituloModal">
             @section('contenido-modal')
                 <form id="{{$idFormularioModulo}}">
@@ -208,7 +218,7 @@
                     </div>
                     <input 
                     type="hidden"
-                    name="idAdministradorConsulta">
+                    name="{{$inputHidenNameIdAdministrador}}">
                 </form>
                 {{-- Componente alert para mostrar información correspondiente a las validaciones. --}}
                 <x-alerts.alertValidacioneForm/>
@@ -216,15 +226,9 @@
         </x-modal>
 
         {{-- Butones flotantes de acción módulo. --}}
-        @section('contenedor-boton-flotante-agregar')     
-            @php
-                $claseBotonFlotanteAgregar = "btnAgregarAdministrador";
-                $idModal = "#modalAdmnistrador";
-                $identificadorAccion = "administrador";
-            @endphp 
+        @section('contenedor-boton-flotante-agregar')
             <x-buttons.botonFlotanteAgregar
             :clase-boton-flotante-agregar="$claseBotonFlotanteAgregar"
-            :id-modal="$idModal"
             :identificador-accion="$identificadorAccion"/>
         @endsection
         

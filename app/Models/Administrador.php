@@ -117,7 +117,7 @@ class Administrador extends Model
         $passw = "";
         $nombreUsuario = "";
         $idAdministradorConsulta = $request->idAdministradorConsulta;
-        $fechaRegistro = date("Y-m-d H:i:s");
+        $fechaActualizacion = date("Y-m-d H:i:s");
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
@@ -136,7 +136,7 @@ class Administrador extends Model
             'email' => $email,
             'passw' => $passw,
             'nombreusuario' => $nombreUsuario,
-            'fecharegistro' => $fechaRegistro,
+            'fechaactualizacion' => $fechaActualizacion,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
         ]);

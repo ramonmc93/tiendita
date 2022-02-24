@@ -191,6 +191,18 @@ return [
         'idAdministrador' => [
             'required' => 'El administrador que esta intentando eliminar no existe.',
             'gt' => 'El administrador que esta intentando eliminar no existe.'
+        ],
+        'nombreCategoria' => [
+            'required' => 'El nombre de la categoría no puede ser vacía y debe de tener una longitud mínima de 5 caracteres máximo 25.',
+            'min' => 'El nombre de la categoría debe de tener una longitud mínima de 5 caracteres.',
+            'max' => 'El nombre de la categoría debe de tener una longitud máxima de 25 caracteres.',
+            'string' => 'El nombre para la categoría es incorrecto.',
+        ],
+        'descripcionCategoria' => [
+            'required' => 'La descripción para la categoría no puede ser vacía y debe de tener una longitud mínima de 10 caracteres máximo 150.',
+            'min' => 'La descripción para la categoría debe de tener una longitud mínima de 10 caracteres.',
+            'max' => 'La descripción para la categoría debe de tener una longitud máxima de 150 caracteres.',
+            'string' => 'La descripción para la categoría es incorrecta.',
         ]
     ],
 

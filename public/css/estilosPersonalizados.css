@@ -622,6 +622,10 @@ button {
     padding-left: 0px!important;
 }
 
+.pb-0 {
+    padding-bottom: 0!important;
+}
+
 /* Bordes */
 .borderNS {
     border-top: 0!important;

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\CategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,17 +53,25 @@ Route::get('/login', function(){
  // ---- Asignación de middleware.
 Route::middleware(['existe-sesion-activa'])->group(function () {
     
-    Route::get('/modulos/administradores', [AdministradorController::class, 'obtenerDatosAdministradores']);
-
-    Route::get('/modulos/productos', function() {
-        return view("modulos.producto");
-    });
-
+    
     // --- Módulo administradores
+    Route::get('/modulos/administradores', [AdministradorController::class, 'obtenerDatosAdministradores']);
+    Route::post('/administradores/guardar-modificar', [AdministradorController::class, 'guardarAdministrador']);
     Route::post('/administradores/datos', [AdministradorController::class, 'obtenerDatosAdministradores']);
     Route::post('/administrador/datos', [AdministradorController::class, 'obtenerDatosAdministrador']);
     Route::post('/administrador/eliminar', [AdministradorController::class, 'eliminarAdministrador']);
 
-});
 
-Route::post('/administradores/guardar-modificar', [AdministradorController::class, 'guardarAdministrador']);
+    // --- Módulo categorías
+    Route::get('/modulos/categorias', [CategoriaController::class, 'obtenerDatosCategorias']);
+    Route::post('/categorias/guardar-modificar', [CategoriaController::class, 'guardarCategoria']);
+    Route::post('/categorias/datos', [CategoriaController::class, 'obtenerDatosCategorias']);
+    Route::post('/categoria/datos', [CategoriaController::class, 'obtenerDatosCategoria']);
+
+
+    // --- Módulo productos
+    Route::get('/modulos/productos', function() {
+        return view("modulos.producto");
+    });
+
+});
