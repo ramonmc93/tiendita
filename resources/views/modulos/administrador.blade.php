@@ -241,7 +241,4 @@
 
     @section('estilos-modulos-otros')
         <link rel="stylesheet" href="{{asset('js/plugins/tempusdominus/tempusdominus-bootstrap-4.min.css')}}">
-    @endsection
-
-    
-    
+    @endsection    

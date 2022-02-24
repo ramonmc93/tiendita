@@ -71,7 +71,8 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
 
 
     // --- Módulo productos
-    Route::get('/modulos/productos', function() {
+    Route::get('/modulos/productos', [CategoriaController::class, 'obtenerDatosCategorias']);
+    Route::get('', function() {
         return view("modulos.producto");
     });
 
