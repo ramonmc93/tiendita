@@ -59,8 +59,10 @@ function mostrarErrorValidaciones( frm = "", data, type = 0 ) {
 
         // --- Otras validaciones.
         if ( dataType1 != undefined && Object.values(dataType1).length > 0 ) {
-            for (let name of dataType1.propiedadesName) {
-                dataType0.validaciones[name] = [ dataType1.textoValidacion[name] ];
+            if ( dataType1.propiedadesName != undefined ) {
+                for (let name of dataType1.propiedadesName) {
+                    dataType0.validaciones[name] = [ dataType1.textoValidacion[name] ];
+                }
             }
         }
         

@@ -3,7 +3,9 @@ window.addEventListener("DOMContentLoaded", function(){
     $(document).on("click", ".btnAgregarProducto", function() {
         $("#modalProducto").modal("show");
         $("input[name='idProductoConsulta']").removeAttr("value");
-        // $("#frmProductos .campoFormulario").val("");
+        $("#frmProductos .campoFormulario").val("");
+        $("select[name='estadoProducto'] option")[0].selected = true;
+        $("select[name='categoriaProducto'] option")[0].selected = true;
     });
 
     // ---- Guardar / Modificar producto.
