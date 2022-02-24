@@ -262,6 +262,7 @@ class AdministradorController extends Controller
         $administradorRows = DB::table('administradores')
         ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
         ->where('estado', '=', 'A')
+        ->orderBy('idadministradores', 'desc')
         ->get();
 
         $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);

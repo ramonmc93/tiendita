@@ -1045,6 +1045,9 @@ label {
 }
 
 /* Botones de acción correspondiente a la tabla del módulo N */
+.btnActualizarTabla {
+    width: auto;
+}
 
 .btnConsultar, .btnCancelar {
     background-color: var(--colorPrimarioTercero);
@@ -1056,12 +1059,13 @@ label {
     border-color: var(--colorPrimarioPrincipal);
 }
 
-.btnEditar, .btnGuardarActualizar, .bootbox-accept {
+.btnEditar, .btnGuardarActualizar, .bootbox-accept, .btnActualizarTabla {
     background-color: var(--colorSecundarioSegundo);
     border-color: var(--colorSecundarioSegundo);
 }
 
-.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus, .bootbox-accept:hover, .bootbox-accept:focus {
+.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus, .bootbox-accept:hover, .bootbox-accept:focus, 
+.btnActualizarTabla:hover, .btnActualizarTabla:focus {
     background-color: var(--colorSecundarioPrincipal);
     border-color: var(--colorSecundarioPrincipal);
 }

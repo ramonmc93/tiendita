@@ -10,9 +10,7 @@
         @section('content-tabla-modulo')
 
             <article class="w-p-90 mt-4 row justify-content-center">
-                <button 
-                type="button"
-                class="btn btn-primary btnActualizarTabla">Actualizar</button>
+
                 <div class="table-responsive">
                     <table class="table table-striped" id="tablaAdministradores">
                         <thead>
@@ -183,10 +181,10 @@
                                 <label for="tipoAdministrador">Tipo de administrador:</label>                                
                                 <div class="form-check">
                                     <input 
-                                    class="form-check-input campoFormulario obligatorio" 
+                                    class="form-check-input obligatorio" 
                                     type="radio" 
-                                    value="A" 
                                     id="tipoAdministrador"
+                                    value="A" 
                                     name="tipoUsuario"
                                     checked="checked">
                                     <label class="form-check-label" for="tipoAdministrador">
@@ -195,7 +193,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input 
-                                    class="form-check-input campoFormulario" 
+                                    class="form-check-input" 
                                     type="radio" 
                                     value="SA" 
                                     id="tipoSuperAdministrador"
