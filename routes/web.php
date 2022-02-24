@@ -52,16 +52,16 @@ Route::get('/login', function(){
  // ---- Asignación de middleware.
 Route::middleware(['existe-sesion-activa'])->group(function () {
     
-    Route::get('/modulos/administradores', function() {
-        return view("modulos.administrador");
-    });
+    Route::get('/modulos/administradores', [AdministradorController::class, 'obtenerDatosAdministradores']);
 
     Route::get('/modulos/productos', function() {
         return view("modulos.producto");
     });
 
+    // --- Módulo administradores
     Route::post('/administradores/datos', [AdministradorController::class, 'obtenerDatosAdministradores']);
-    
+    Route::post('/administrador/datos', [AdministradorController::class, 'obtenerDatosAdministrador']);
+
 });
 
 Route::post('/administradores/guardar-modificar', [AdministradorController::class, 'guardarAdministrador']);

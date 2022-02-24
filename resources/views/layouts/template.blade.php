@@ -121,7 +121,10 @@
         <script src="{{asset('js/plugins/popper/popper.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('css/librerias/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('js/plugins/datatables.net-bs5/js/dataTables.bootstrap5.js')}}"></script>
+        {{-- Datatable --}}
+        <script src="{{asset('js/plugins/datatables.net-bs5/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('js/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+        {{-- Datatable end--}}
         {{-- bootbox code --}}
         <script src="{{asset('js/librerias/bootbox/dist/bootbox.min.js')}}"></script>
         <script src="{{asset('js/librerias/bootbox/dist/bootbox.locales.min.js')}}"></script>

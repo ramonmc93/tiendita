@@ -14,46 +14,63 @@
                 type="button"
                 class="btn btn-primary btnActualizarTabla">Actualizar</button>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tablaAdministradores">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
+                                <th>Tipo de usuario</th>
+                                <th>Email</th>
                                 <th>Consultar</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Ramón Martínez Cruz</td>
-                                <td>
-                                    <button 
-                                    type="button" 
-                                    class="btn btn-primary btnConsultar"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalAdmnistrador">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button 
-                                    type="button" 
-                                    class="btn btn-primary btnEditar"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalAdmnistrador">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button 
-                                    type="button" 
-                                    class="btn btn-primary btnEliminar">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @php
+                                $index = 1;
+                            @endphp
+                            @foreach ($administradorRows as $rowAdministrador)
+                                @php
+                                    $nombreCompleto = $rowAdministrador["nombre"].' '.$rowAdministrador["apellidopaterno"].' '.$rowAdministrador["apellidomaterno"];
+                                    $tipousuario = $rowAdministrador["tipousuario"];
+                                    $email = $rowAdministrador["email"];
+                                    $idAdministrador = $rowAdministrador["idadministradores"];
+                                @endphp
+                                <tr>
+                                    <td>{{$index}}</td>
+                                    <td>{{$nombreCompleto}}</td>
+                                    <td>{{$tipousuario}}</td>
+                                    <td>{{$email}}</td>
+                                    <td>
+                                        <button 
+                                        type="button" 
+                                        class="btn btn-primary btnConsultar"
+                                        data-id-administrador={{$idAdministrador}}>
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+                                        type="button" 
+                                        class="btn btn-primary btnEditar"
+                                        data-id-administrador={{$idAdministrador}}>
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+                                        type="button" 
+                                        class="btn btn-primary btnEliminar"
+                                        data-id-administrador={{$idAdministrador}}>
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @php
+                                    $index++;
+                                @endphp
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -168,7 +185,7 @@
                                     <input 
                                     class="form-check-input obligatorio" 
                                     type="radio" 
-                                    value="Ad" 
+                                    value="A" 
                                     id="tipoAdministrador"
                                     name="tipoUsuario"
                                     checked="checked">
@@ -193,7 +210,7 @@
                     </div>
                     <input 
                     type="hidden"
-                    name="{{$nameIdAdministrador}}">
+                    name="idAdministradorConsulta">
                 </form>
                 {{-- Componente alert para mostrar información correspondiente a las validaciones. --}}
                 <x-alerts.alertValidacioneForm/>

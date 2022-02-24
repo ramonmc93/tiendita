@@ -133,7 +133,7 @@ class AdministradorController extends Controller
         $fechaNacimiento = trim($request->fechaNacimiento);
         $direccion = trim($request->direccion);
         $codigoPostal = trim($request->codigoPostal);
-        $idAdministrador = trim($request->idAdministrador);
+        $idAdministradorConsulta = trim($request->idAdministradorConsulta);
 
         // ---- Validaciones
         $arrayInputs = [
@@ -208,9 +208,19 @@ class AdministradorController extends Controller
             }
             
             // --- Gurdar administrador.
-            $estadoOperacion = Administrador::guardarAdministrador($request);
-            if ( $estadoOperacion ) {
-                print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
+            if ( empty($idAdministradorConsulta) ) {
+
+                $estadoOperacion = Administrador::guardarAdministrador($request);
+                if ( $estadoOperacion ) {
+                    print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
+                }
+
+            } else {
+                // --- Actualización administrador.
+                $estadoOperacion = Administrador::actualizarAdministrador($request);
+                if ( $estadoOperacion ) {
+                    print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue actualizado correctamente." ) ) );
+                }
             }
 
         }
@@ -219,8 +229,11 @@ class AdministradorController extends Controller
 
 
     // --- Función para obtener los datos de los administradores.
-    public function obtenerDatosAdministradores() {
+    public function obtenerDatosAdministradores( Request $request ) {
         
+        $tipoPeticion = $request->tipoPeticion;
+        $idAdministrador = $request->idAdministrador;
+
         // --- Validar que el correo no exista.
         $administradorRows = DB::table('administradores')
         ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'tipousuario', 'email')
@@ -228,7 +241,31 @@ class AdministradorController extends Controller
         ->get();
 
         $administradorRows = $this->funcionesGenerales->parseQuery($administradorRows);
-        print_r(json_encode($administradorRows));
+
+        if ( $tipoPeticion == 'post' ) {
+            print_r(json_encode($administradorRows));
+
+        } else {
+            return view("modulos.administrador", ["administradorRows" => $administradorRows ]);
+        }
+
+    }
+
+    // --- Función para obtener la información del administrador seleccionado.
+    public function obtenerDatosAdministrador( Request $request ) {
+
+        $idAdministrador = $request->idAdministrador;
+
+        // --- Validar que el correo no exista.
+        $administradorRow = DB::table('administradores')
+        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'fechanacimiento', 'direccion', 'codigopostal', 'telcelular', 'telcasa', 'tipousuario', 'email', 
+        'nombreusuario')
+        ->where('estado', '=', 'A')
+        ->where('idadministradores', '=', $idAdministrador)
+        ->get();
+
+        $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
+        print_r(json_encode($administradorRow));
 
     }
 

@@ -102,4 +102,44 @@ class Administrador extends Model
         
     }
 
+    public function actualizarAdministrador($request) {
+        
+        $nombre = $request->nombre;
+        $apellidoPaterno = $request->apellidoPaterno;
+        $apellidoMaterno = $request->apellidoMaterno;
+        $fechaNacimiento = date("Y-m-d", strtotime($request->fechaNacimiento));
+        $direccion = $request->direccion;
+        $codigoPostal = $request->codigoPostal;
+        $telCelular = $request->telCelular;
+        $telCasa = $request->telCasa;
+        $tipoUsuario = $request->tipoUsuario;
+        $email = $request->email;
+        $passw = "";
+        $nombreUsuario = "";
+        $fechaRegistro = date("Y-m-d H:i:s");
+        $estado = "A";
+        $idUsuarioRegistro = session('idAdministrador');
+
+        $estadoOperacion = DB::table('administradores')->insert([
+            'nombre' => $nombre,
+            'apellidopaterno' => $apellidoPaterno,
+            'apellidomaterno' => $apellidoMaterno,
+            'fechanacimiento' => $fechaNacimiento,
+            'direccion' => $direccion,
+            'codigopostal' => $codigoPostal,
+            'telcelular' => $telCelular,
+            'telcasa' => $telCasa,
+            'tipousuario' => $tipoUsuario,
+            'email' => $email,
+            'passw' => $passw,
+            'nombreusuario' => $nombreUsuario,
+            'fecharegistro' => $fechaRegistro,
+            'estado' => $estado,
+            'idusuarioregistro' => $idUsuarioRegistro,
+        ]);
+
+        return $estadoOperacion;
+        
+    }
+
 }
