@@ -296,9 +296,11 @@ class AdministradorController extends Controller
     }
 
 
-    // --- Login, validación de credenciales.
+    /**
+     * Login, validación de credenciales.
+     */
     public function loginValidacion(Request $request) {
-        
+
         $correoUsuario = $request->correoUsuario;
         $password = $request->password;
         $estado = 'A';
@@ -320,9 +322,9 @@ class AdministradorController extends Controller
         
         if ( !$validator->passes() ) {
             $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
-            print_r( json_encode( $arrayEstadoRespuesta ) );
+            print_r( json_encode( array( $arrayEstadoRespuesta ) ) );
         }
-
+        
 
         /**
          * Verificar que las credenciales del administrador existan.

@@ -43,12 +43,14 @@
                                     $nombreProducto = $rowProducto["nombre"];
                                     $precioProducto = $rowProducto["precio"];
                                     $stockProducto = $rowProducto["stock"];
+                                    $descuentoProducto = $rowProducto["descuento"];
                                     $idProducto = $rowProducto["idproductos"];
                                 @endphp
                                 <tr>
                                     <td>{{$index}}</td>
                                     <td>{{$nombreProducto}}</td>
-                                    <td>{{$precioProducto}}</td>
+                                    <td>{{"$".$precioProducto}}</td>
+                                    <td>{{$descuentoProducto."%"}}</td>
                                     <td>{{$stockProducto}}</td>
                                     <td>
                                         <button 
@@ -105,115 +107,74 @@
                                 <input 
                                 class="form-control campoFormulario obligatorio"
                                 type="text" 
-                                name="nombre">
+                                name="nombreProducto">
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                             <div class="col-12 col-md-4">
-                                <label for="apellidoPaterno">Apellido paterno:</label>
-                                <input 
+                                <label for="descripcionEspecificaProducto">Descripcion específica:</label>
+                                <textarea 
                                 class="form-control campoFormulario obligatorio"
-                                type="text" 
-                                name="apellidoPaterno">
+                                name="descripcionEspecificaProducto"></textarea>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                             <div class="col-12 col-md-4">
-                                <label for="apellidoMaterno">Apellido materno:</label>
-                                <input 
-                                class="form-control campoFormulario"
-                                type="text" 
-                                name="apellidoMaterno">
+                                <label for="descripcionGeneralProducto">Descripcion general:</label>
+                                <textarea 
+                                class="form-control campoFormulario obligatorio"
+                                name="descripcionGeneralProducto"></textarea>
+                                <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-12 col-md-4">
-                                <label for="telCelular">Teléfono celular:</label>
-                                <input 
-                                class="form-control campoFormulario obligatorio"
-                                type="text" 
-                                name="telCelular">
+                                <label for="estadoProducto">Estado del producto:</label>
+                                <select 
+                                class="form-select campoFormulario obligatorio"
+                                name="estadoProducto">
+                                    <option value="0">---Seleccione---</option>
+                                    <option value="nvo">Nuevo</option>
+                                    <option value="udo">Usado</option>
+                                </select>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                             <div class="col-12 col-md-4">
-                                <label for="telCasa">Teléfono casa:</label>
+                                <label for="precioProducto">Precio:</label>
                                 <input
                                 class="form-control campoFormulario obligatorio"
                                 type="text" 
-                                name="telCasa">
+                                name="precioProducto">
+                                <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                             <div class="col-12 col-md-4">
-                                <label for="email">Email:</label>
+                                <label for="descuentoProducto">Descuento:</label>
                                 <input 
-                                class="form-control campoFormulario obligatorio"
-                                type="email" 
-                                name="email">
-                                <span class="campoObligatorio">Este campo es obligatorio</span>
+                                class="form-control campoFormulario"
+                                type="text" 
+                                name="descuentoProducto">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-12 col-md-4">
-                                <label for="fechaNacimiento">Fecha de nacimiento:</label>                                
-                                <div class="input-group date" id="fechaNacimiento" data-target-input="nearest">
-                                    <input 
-                                    class="form-control campoFormulario datetimepicker-input obligatorio"
-                                    type="text" 
-                                    name="fechaNacimiento"
-                                    data-target="#fechaNacimiento"
-                                    placeholder="mm/dd/yyyy">
-                                    <div 
-                                    class="input-group-append" 
-                                    data-target="#fechaNacimiento" 
-                                    data-toggle="datetimepicker">
-                                        <div class="input-group-text">
-                                            <img src="{{asset('imagenes/inputs/calendariocheck.svg')}}" alt="Imagen calendario">
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="campoObligatorio">Este campo es obligatorio</span>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label for="direccion">Dirección:</label>
-                                <textarea
-                                class="form-control campoFormulario obligatorio"
-                                type="text" 
-                                name="direccion"
-                                rows="10"></textarea>
-                                <span class="campoObligatorio">Este campo es obligatorio</span>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label for="codigoPostal">Código postal:</label>
+                                <label for="stockProducto">Stock:</label>
                                 <input 
-                                class="form-control campoFormulario obligatorio"
+                                class="form-control campoFormulario"
                                 type="text" 
-                                name="codigoPostal">
-                                <span class="campoObligatorio">Este campo es obligatorio</span>
+                                name="stockProducto">
                             </div>
-                        </div>
-                        <div class="row form-group">
                             <div class="col-12 col-md-4">
-                                <label for="tipoAdministrador">Tipo de administrador:</label>                                
-                                <div class="form-check">
-                                    <input 
-                                    class="form-check-input obligatorio" 
-                                    type="radio" 
-                                    id="tipoAdministrador"
-                                    value="A" 
-                                    name="tipoUsuario"
-                                    checked="checked">
-                                    <label class="form-check-label" for="tipoAdministrador">
-                                        Administrador
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input 
-                                    class="form-check-input" 
-                                    type="radio" 
-                                    value="SA" 
-                                    id="tipoSuperAdministrador"
-                                    name="tipoUsuario">
-                                    <label class="form-check-label" for="tipoSuperAdministrador">
-                                        Superadministrador
-                                    </label>
-                                </div>
+                                <label for="categoriaProducto">Categoría:</label>
+                                <select 
+                                class="form-select campoFormulario obligatorio"
+                                name="categoriaProducto">
+                                    <option value="0">---Seleccione---</option>
+                                    @foreach ($categoriasRows as $rowCategoria)
+                                        @php
+                                            $idCategoria = $rowCategoria["idcategorias"];
+                                            $nombreCategoria = $rowCategoria["nombre"];
+                                        @endphp
+                                        <option value="{{$idCategoria}}">{{$nombreCategoria}}</option>
+                                    @endforeach
+                                </select>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                         </div>
@@ -238,5 +199,5 @@
 
     {{-- Scripts módulos/otros --}}
     @section('scripts-modulos-otros')
-        <script src="{{asset('js/modulos/administradores.js')}}"></script>
+        <script src="{{asset('js/modulos/productos.js')}}"></script>
     @endsection

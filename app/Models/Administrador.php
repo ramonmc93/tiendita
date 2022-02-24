@@ -121,9 +121,7 @@ class Administrador extends Model
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
-        $estadoOperacion = DB::table('administradores')
-        ->where('idadministradores', '=', $idAdministradorConsulta)
-        ->update([
+        $arrayCamposActualizar = [
             'nombre' => $nombre,
             'apellidopaterno' => $apellidoPaterno,
             'apellidomaterno' => $apellidoMaterno,
@@ -134,12 +132,22 @@ class Administrador extends Model
             'telcasa' => $telCasa,
             'tipousuario' => $tipoUsuario,
             'email' => $email,
-            'passw' => $passw,
-            'nombreusuario' => $nombreUsuario,
             'fechaactualizacion' => $fechaActualizacion,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
-        ]);
+        ];
+
+        if ( !empty($passw) ) {
+            $arrayCamposActualizar['passw'] = $passw;
+        }
+
+        if ( !empty($nombreUsuario) ) {
+            $arrayCamposActualizar['nombreusuario'] = $nombreUsuario;
+        }
+
+        $estadoOperacion = DB::table('administradores')
+        ->where('idadministradores', '=', $idAdministradorConsulta)
+        ->update($arrayCamposActualizar);
 
         return $estadoOperacion;
         

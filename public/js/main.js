@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
 function obtenerPropiedadNameCamposFormularios(idFormulario) {
 
     let arrayPropiedadName = [];
-    $("#"+idFormulario+" .obligatorio").each(function(i, j){
+    $("#"+idFormulario+" .campoFormulario").each(function(i, j){
         arrayPropiedadName[i] = j.name;
     });
 
@@ -58,16 +58,16 @@ function mostrarErrorValidaciones( frm = "", data, type = 0 ) {
         }
 
         // --- Otras validaciones.
-        let otrasValidaciones = dataType1.propiedadesName;
-        if ( otrasValidaciones != undefined ) {
-            let validacionIniciales = dataType0.validaciones;
-            for (let name of otrasValidaciones) {
+        if ( dataType1 != undefined && Object.values(dataType1).length > 0 ) {
+            for (let name of dataType1.propiedadesName) {
                 dataType0.validaciones[name] = [ dataType1.textoValidacion[name] ];
             }
         }
         
         for ( let propName of arrayPropiedadName ) {   
-    
+            
+            console.log(propName);
+
             let validacion = dataType0.validaciones[propName];     
             let campoActual = $("*[name='"+propName+"']");
     

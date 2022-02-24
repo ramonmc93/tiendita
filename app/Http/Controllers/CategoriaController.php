@@ -44,6 +44,36 @@ class CategoriaController extends Controller
     }
 
 
+    // --- Función para obtener los datos de las categorías.
+    public static function obtenerDatosCategoriasSelect() {
+    
+        $categoriasRows = DB::table('categorias')
+        ->select('idcategorias', 'nombre')
+        ->where('estado', '=', 'A')
+        ->orderBy('idcategorias', 'desc')
+        ->get();
+
+        $categoriasRows = FuncionesGenerales::parseQuery($categoriasRows);
+        return $categoriasRows;
+
+    }
+
+
+    // --- Función para buscar la categoría seleccionada.
+    public function obtenerDatosCategoriaSeleccionada() {
+    
+        $categoriasRows = DB::table('categorias')
+        ->select('idcategorias', 'nombre')
+        ->where('estado', '=', 'A')
+        ->orderBy('idcategorias', 'desc')
+        ->get();
+
+        $categoriasRows = FuncionesGenerales::parseQuery($categoriasRows);
+        return $categoriasRows;
+
+    }
+
+
     // ---- Guardar nuevas categorías.
     public function guardarCategoria(Request $request) {
 
@@ -132,7 +162,7 @@ class CategoriaController extends Controller
     }
 
 
-    // --- Función para obtener la información del administrador seleccionado.
+    // --- Función para obtener la información de la categoría seleccionada.
     public function obtenerDatosCategoria( Request $request ) {
 
         $idCategoria = $request->idCategoria;
@@ -145,6 +175,21 @@ class CategoriaController extends Controller
 
         $categoriaRow = $this->funcionesGenerales->parseQuery($categoriaRow);
         print_r(json_encode($categoriaRow));
+
+    }
+
+
+    // --- Función para obtener la información de la categoría seleccionada.
+    public function obtenerDatosCategoriaValidacion( $idCategoriaProducto ) {
+
+        $categoriaRow = DB::table('categorias')
+        ->select('idcategorias')
+        ->where('estado', '=', 'A')
+        ->where('idcategorias', '=', $idCategoriaProducto)
+        ->get();
+
+        $categoriaRow = $this->funcionesGenerales->parseQuery($categoriaRow);
+        return $categoriaRow;
 
     }
 

@@ -145,16 +145,17 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
         // Módulo administradores
-        'email' => [
-            'required' => 'El correo electrónico es obligatorio.',
-            'email' => 'El correo electrónico es incorrecto.',
-            'unique' => 'El email que esta intentando utilizar para el registro ya existe.'
-        ],
         'nombre' => [
             'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.',
             'min' => 'El :attribute debe de tener una longitud mínima de 3 caracteres.',
             'max' => 'El :attribute debe de tener una longitud máxima de 25 caracteres.',
+        ],
+        'email' => [
+            'required' => 'El correo electrónico es obligatorio.',
+            'email' => 'El correo electrónico es incorrecto.',
+            'unique' => 'El email que esta intentando utilizar para el registro ya existe.'
         ],
         'apellidoPaterno' => [
             'required' => 'El :attribute no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.',
@@ -163,11 +164,11 @@ return [
         ],
         'telCelular' => [
             'required' => 'El teléfono celulular es obligatorio.',
-            'numeric' => 'El teléfono celulular debe ser númerico de 10 dígitos.',
+            'numeric' => 'El teléfono celulular debe ser numérico de 10 dígitos.',
             'digits_between' => 'El teléfono celulular debe de tener una longitud máxima de 10 dígitos.',
         ],
         'telCasa' => [
-            'numeric' => 'El teléfono de casa debe ser númerico de 10 dígitos.',
+            'numeric' => 'El teléfono de casa debe ser numérico de 10 dígitos.',
             'digits_between' => 'El teléfono de casa debe de tener una longitud máxima de 10 dígitos.',
         ],
         'fechaNacimiento' => [
@@ -193,6 +194,7 @@ return [
             'required' => 'El administrador que esta intentando eliminar no existe.',
             'gt' => 'El administrador que esta intentando eliminar no existe.'
         ],
+        
         // Módulo categorías
         'nombreCategoria' => [
             'required' => 'El nombre de la categoría no puede ser vacía y debe de tener una longitud mínima de 5 caracteres máxima 25.',
@@ -210,6 +212,32 @@ return [
             'required' => 'La categoría que esta intentando eliminar no existe.',
             'gt' => 'La categoría que esta intentando eliminar no existe.'
         ],
+
+        // Módulo de productos
+        'nombreProducto' => [
+            'required' => "El nombre del producto es obligarorio y debe tener una longitud mínima de 3 caracteres máximo 50.",
+            'min' => "El nombre del producto debe de tener una longitud mínima de 3 caracteres.",
+            'max' => "El nombre del producto debe de tener una longitud máxima de 50 caracteres."
+        ],
+        'descripcionEspecificaProducto' => [
+            'required' => "La descripción específica para el producto es obliglatoria.",
+            'min' => "La descripción específica para el producto debe de tener una longitud mínima de 10 caracteres.",
+            'max' => "La descripción específica para el producto debe de tener una longitud máxima de 50 caracteres .",
+        ],
+        'descripcionGeneralProducto' => [
+            'required' => "La descripción general para el producto es obliglatoria.",
+            'min' => "La descripción general para el producto debe de tener una longitud mínima de 10 caracteres.",
+            'max' => "La descripción general para el producto debe de tener una longitud máxima de 50 caracteres .",
+        ],
+        'precioProducto' => [
+            'required' => "El precio del producto es obligatorio.",
+            'numeric' => "El precio del producto debe se numérico mayor o igual a 0.",
+        ],
+        'descuentoProducto' => [
+            'numeric' => "El descuento para el producto debe ser numérico entre 0 y 100.",
+            'digits_between' => "El descuento para el producto debe ser numérico entre 0 y 100.",
+        ],
+
     ],
 
     /*

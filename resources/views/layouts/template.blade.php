@@ -99,10 +99,12 @@
                     @yield('title-module')
                 </h1>
             </div>
-            <div class="row w-p-90 justify-content-center">
-                <button 
-                type="button"
-                class="btn btn-primary btnActualizarTabla mt-4">Actualizar</button>
+            <div class="container-fluid">
+                <div class="row w-p-90 justify-content-center">
+                    <button 
+                    type="button"
+                    class="btn btn-primary btnActualizarTabla mt-4">Actualizar</button>
+                </div>
             </div>
             <section class="container-fluid d-flex justify-content-center">
                 @yield('content-cards-producto')
