@@ -75,7 +75,8 @@ class Producto extends Model
         $fechaActualizacion = date("Y-m-d H:i:s");
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
-
+        
+        
         $arrayCamposActualizar = [
             'nombre' => $nombreProducto,
             'descripcionespecifica' => $descripcionEspecificaProducto,

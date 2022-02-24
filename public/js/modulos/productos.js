@@ -166,7 +166,8 @@ window.addEventListener("DOMContentLoaded", function(){
                 let precioProducto = data.precio;
                 let descuentoProducto = data.descuento;
                 let stockProducto = data.stock;
-                                
+                let categoriaProducto = data.idcategoriasfk;
+
                 $('*[name="nombreProducto"]').val(nombreProducto);
                 $('*[name="descripcionEspecificaProducto"]').val(descripcionEspecifica);
                 $('*[name="descripcionGeneralProducto"]').val(descripcionGeneral);
@@ -174,6 +175,7 @@ window.addEventListener("DOMContentLoaded", function(){
                 $('*[name="precioProducto"]').val(precioProducto);
                 $('*[name="descuentoProducto"]').val(descuentoProducto);
                 $('*[name="stockProducto"]').val(stockProducto);
+                $("select[name='categoriaProducto'] option[value='"+categoriaProducto+"']")[0].selected = true;
 
                 if ( operacion != 'consultar' ) {
                     $('*[name="idProductoConsulta"]').val(idProducto);

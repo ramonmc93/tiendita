@@ -55,8 +55,10 @@ class ProductoController extends Controller
         $idProducto = $request->idProducto;
 
         $productoRow = DB::table('productos')
-        ->select('idproductos', 'nombre', 'descripcionespecifica', 'descripciongeneral', 'estadoproducto', 'precio', 'descuento', 'stock', 'fecharegistro', 'estado')
-        ->where('estado', '=', 'A')
+        ->select('idproductos', 'nombre', 'descripcionespecifica', 'descripciongeneral', 'estadoproducto', 'precio', 'descuento', 'stock', 'productos_categorias.idcategoriasfk')
+        ->join('productos_categorias', 'productos.idproductos', '=', 'productos_categorias.idproductosfk')
+        ->where('productos.estado', '=', 'A')
+        ->where('productos_categorias.estado', '=', 'A')
         ->where('idproductos', '=', $idProducto)
         ->get();
 
@@ -78,6 +80,13 @@ class ProductoController extends Controller
         $stockProducto = trim($request->stockProducto);
         $idCategoriaProducto = trim($request->categoriaProducto);
         $idProductoConsulta = trim($request->idProductoConsulta);
+
+        if ( empty($descuentoProducto) ) {
+            $request->descuentoProducto = 0;
+
+        } if ( empty($stockProducto) ) {
+             $request->stockProducto = 0;
+        }
 
         // ---- Validaciones
         $arrayInputs = [
