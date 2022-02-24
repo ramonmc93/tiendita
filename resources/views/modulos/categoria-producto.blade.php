@@ -47,7 +47,7 @@
                                         <button 
                                         type="button" 
                                         class="btn btn-primary btnConsultar"
-                                        data-id-administrador={{$idCategoria}}>
+                                        data-id-categoria={{$idCategoria}}>
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </td>
@@ -55,7 +55,7 @@
                                         <button 
                                         type="button" 
                                         class="btn btn-primary btnEditar"
-                                        data-id-administrador={{$idCategoria}}>
+                                        data-id-categoria={{$idCategoria}}>
                                             <i class="fa fa-edit"></i>
                                         </button>
                                     </td>
@@ -63,7 +63,7 @@
                                         <button 
                                         type="button" 
                                         class="btn btn-primary btnEliminar"
-                                        data-id-administrador={{$idCategoria}}>
+                                        data-id-categoria={{$idCategoria}}>
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>

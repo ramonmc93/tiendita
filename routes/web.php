@@ -67,6 +67,7 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
     Route::post('/categorias/guardar-modificar', [CategoriaController::class, 'guardarCategoria']);
     Route::post('/categorias/datos', [CategoriaController::class, 'obtenerDatosCategorias']);
     Route::post('/categoria/datos', [CategoriaController::class, 'obtenerDatosCategoria']);
+    Route::post('/categoria/eliminar', [CategoriaController::class, 'eliminarCategoria']);
 
 
     // --- Módulo productos

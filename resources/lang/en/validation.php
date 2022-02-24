@@ -145,6 +145,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        // Módulo administradores
         'email' => [
             'required' => 'El correo electrónico es obligatorio.',
             'email' => 'El correo electrónico es incorrecto.',
@@ -192,18 +193,23 @@ return [
             'required' => 'El administrador que esta intentando eliminar no existe.',
             'gt' => 'El administrador que esta intentando eliminar no existe.'
         ],
+        // Módulo categorías
         'nombreCategoria' => [
-            'required' => 'El nombre de la categoría no puede ser vacía y debe de tener una longitud mínima de 5 caracteres máximo 25.',
+            'required' => 'El nombre de la categoría no puede ser vacía y debe de tener una longitud mínima de 5 caracteres máxima 25.',
             'min' => 'El nombre de la categoría debe de tener una longitud mínima de 5 caracteres.',
             'max' => 'El nombre de la categoría debe de tener una longitud máxima de 25 caracteres.',
             'string' => 'El nombre para la categoría es incorrecto.',
         ],
         'descripcionCategoria' => [
-            'required' => 'La descripción para la categoría no puede ser vacía y debe de tener una longitud mínima de 10 caracteres máximo 150.',
+            'required' => 'La descripción para la categoría no puede ser vacía y debe de tener una longitud mínima de 10 caracteres máxima 150.',
             'min' => 'La descripción para la categoría debe de tener una longitud mínima de 10 caracteres.',
             'max' => 'La descripción para la categoría debe de tener una longitud máxima de 150 caracteres.',
             'string' => 'La descripción para la categoría es incorrecta.',
-        ]
+        ],
+        'idCategoria' => [
+            'required' => 'La categoría que esta intentando eliminar no existe.',
+            'gt' => 'La categoría que esta intentando eliminar no existe.'
+        ],
     ],
 
     /*

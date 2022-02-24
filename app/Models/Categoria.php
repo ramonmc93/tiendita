@@ -40,8 +40,8 @@ class Categoria extends Model
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
-        $estadoOperacion = DB::table('administradores')
-        ->where('idadministradores', '=', $idAdministradorConsulta)
+        $estadoOperacion = DB::table('categorias')
+        ->where('idcategorias', '=', $idCategoriaConsulta)
         ->update([
             'nombre' => $nombreCategoria,
             'descripcion' => $descripcionCategoria,
@@ -52,6 +52,25 @@ class Categoria extends Model
 
         return $estadoOperacion;
         
+    }
+
+    // --- Función para eliminar la categoría.
+    public static function eliminarCategoria($idCategoria) {
+
+        $fechaActualizacion = date("Y-m-d H:i:s");
+        $estado = "E";
+        $idUsuarioElimino = session('idAdministrador');
+
+        $estadoOperacion = DB::table('categorias')
+        ->where('idcategorias', '=', $idCategoria)
+        ->update([
+            'fechaactualizacion' => $fechaActualizacion,
+            'estado' => $estado,
+            'idusuarioelimino' => $idUsuarioElimino,
+        ]);
+
+        return $estadoOperacion;
+
     }
 
 }

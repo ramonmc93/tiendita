@@ -135,18 +135,79 @@ class CategoriaController extends Controller
     // --- Función para obtener la información del administrador seleccionado.
     public function obtenerDatosCategoria( Request $request ) {
 
-        $idAdministrador = $request->idAdministrador;
+        $idCategoria = $request->idCategoria;
 
-        // --- Validar que el correo no exista.
-        $administradorRow = DB::table('administradores')
-        ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'fechanacimiento', 'direccion', 'codigopostal', 'telcelular', 'telcasa', 'tipousuario', 'email', 
-        'nombreusuario')
+        $categoriaRow = DB::table('categorias')
+        ->select('idcategorias', 'nombre', 'descripcion')
         ->where('estado', '=', 'A')
-        ->where('idadministradores', '=', $idAdministrador)
+        ->where('idcategorias', '=', $idCategoria)
         ->get();
 
-        $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
-        print_r(json_encode($administradorRow));
+        $categoriaRow = $this->funcionesGenerales->parseQuery($categoriaRow);
+        print_r(json_encode($categoriaRow));
+
+    }
+
+
+    // --- Eliminar categoría
+    public function eliminarCategoria(Request $request) {
+
+        $idCategoria = $request->idCategoria;
+        $idAdministradorSesion = session('idAdministrador');
+
+        // ---- Validaciones
+        $arrayInputs = [
+            'idCategoria' => $idCategoria
+        ];
+
+        $arrayValidations = [
+            'idCategoria' => 'required|gt:0'
+        ];
+
+        $validator = Validator::make($arrayInputs, $arrayValidations);
+        $arrayEstadoRespuesta = array();
+        if ( !$validator->passes() ) {
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+        
+        /**
+        * Otras validaciones
+        */
+        // ---- Validar que la categoría exista.
+        $categoriasRows = DB::table('categorias')
+        ->select('idcategorias')
+        ->where('idcategorias', '=', $idCategoria)
+        ->where('estado', '=', 'A')
+        ->get();
+
+        $idCategoriaConsulta = "";
+        $idCategoria = $this->funcionesGenerales->parseQuery($categoriasRows);
+        if ( !empty($idCategoria[0]["idcategorias"]) ) {
+            $idCategoriaConsulta = $idCategoria[0]["idcategorias"];
+        }
+
+        if ( empty($idCategoriaConsulta) ) {
+            $arrayTextoValidaciones["idCategoria"][0] = "La categoría que esta intentando eliminar no existe.";
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $arrayTextoValidaciones];
+        }
+        
+        if ( !empty($arrayEstadoRespuesta) ) {
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+
+        // --- Se elimina
+        $estadoEliminacion = Categoria::eliminarCategoria($idCategoria);
+
+        if ( $estadoEliminacion ) {
+            $arrayEstadoRespuesta = ["estado" => true, "mensaje" => "Categoría eliminada correctamente."];
+        } else {
+            $arrayEstadoRespuesta = ["estado" => false, "mensaje" => "No se pudo eliminar la categoría, si el problema persiste contacte al administrador del sistema."];
+        }
+
+        print_r(json_encode($arrayEstadoRespuesta ));
 
     }
 

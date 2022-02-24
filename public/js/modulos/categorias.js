@@ -70,7 +70,7 @@ window.addEventListener("DOMContentLoaded", function(){
     });
 
 
-    // --- Actualizar tabla administradores
+    // --- Actualizar tabla categorías
     $(document).on("click", ".btnActualizarTabla", function(){
         actualizarTablaCategorias();
     });
@@ -132,7 +132,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    // --- Consultar información del administrador.
+    // --- Consultar información de la categoría.
     $(document).on("click", ".btnConsultar", function(){
         mostrarInformacionFormularioCategoria(this);
     });
@@ -143,13 +143,13 @@ window.addEventListener("DOMContentLoaded", function(){
 
     function mostrarInformacionFormularioCategoria(_this, operacion = 'consultar') {
 
-        let idCategorias = $(_this).data("id-administrador");
+        let idCategoria = $(_this).data("id-categoria");
         recetearCamposValidaciones( "#frmCategorias" );
 
         $.ajax({
                 
             url:"/categoria/datos",
-            data:{"idCategorias":idCategorias},
+            data:{"idCategoria":idCategoria},
             method:"POST",
             dataType:"JSON",
             success:function(data){
@@ -158,10 +158,10 @@ window.addEventListener("DOMContentLoaded", function(){
 
                 data = data[0];
                 let nombreCategoria = data.nombre;
-                let descripcionCategoria = data.nombre;
+                let descripcionCategoria = data.descripcion;
                 let idCategoria = data.idcategorias;
                                 
-                $('*[name="nombre"]').val(nombreCategoria);
+                $('*[name="nombreCategoria"]').val(nombreCategoria);
                 $('*[name="descripcionCategoria"]').val(descripcionCategoria);
 
                 if ( operacion != 'consultar' ) {
@@ -179,13 +179,13 @@ window.addEventListener("DOMContentLoaded", function(){
 
     }
 
-    // --- Eliminar administrador
+    // --- Eliminar categoría
     $(document).on("click", ".btnEliminar", function() {
 
-        let idAdministrador = $(this).data("id-administrador");
+        let idCategoria = $(this).data("id-categoria");
 
         bootbox.confirm({
-            message: "¿En realidad desea eliminar este administrador?",
+            message: "¿En realidad desea eliminar esta categoría?",
             buttons: {
                 confirm: {
                     label: 'Si',
@@ -202,15 +202,15 @@ window.addEventListener("DOMContentLoaded", function(){
                                         
                     $.ajax({
                 
-                        url:"/administrador/eliminar",
-                        data:{"idAdministrador":idAdministrador},
+                        url:"/categoria/eliminar",
+                        data:{"idCategoria":idCategoria},
                         method:"POST",
                         dataType:"JSON",
                         success:function(data){
                             
                             if ( data["estado"] == "validaciones" ) {
 
-                                var validacionMensaje = data.validaciones.idAdministrador[0];  
+                                var validacionMensaje = data.validaciones.idCategoria[0];  
                                 bootbox.alert({
                                     message: validacionMensaje,
                                     className: 'd-flex align-items-center'

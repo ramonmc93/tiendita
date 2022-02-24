@@ -280,7 +280,6 @@ class AdministradorController extends Controller
 
         $idAdministrador = $request->idAdministrador;
 
-        // --- Validar que el correo no exista.
         $administradorRow = DB::table('administradores')
         ->select('idadministradores', 'nombre', 'apellidopaterno', 'apellidomaterno', 'fechanacimiento', 'direccion', 'codigopostal', 'telcelular', 'telcasa', 'tipousuario', 'email', 
         'nombreusuario')
