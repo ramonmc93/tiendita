@@ -92,9 +92,9 @@ window.addEventListener("DOMContentLoaded", function(){
 
                     let idProducto = producto.idproductos;
                     let nombreProducto = producto.nombre;
-                    let precioProducto = producto.precio;
-                    let descuentoProducto = producto.descuento;
-                    let stockProducto = producto.stock;
+                    let precioProducto = "$"+producto.precio;
+                    let descuentoProducto = producto.descuento+"%";
+                    let stockProducto = ""+producto.stock;
 
                     let filaTableBody = $("<tr>");
                     
@@ -167,19 +167,20 @@ window.addEventListener("DOMContentLoaded", function(){
                 let descuentoProducto = data.descuento;
                 let stockProducto = data.stock;
                                 
-                $('*[name="nombre"]').val(nombreProducto);
-                $('*[name="apellidoPaterno"]').val(descripcionEspecifica);
-                $('*[name="apellidoMaterno"]').val(descripcionGeneral);
-                $('*[name="telCelular"]').val(estadoProducto);
-                $('*[name="telCasa"]').val(precioProducto);
-                $('*[name="email"]').val(descuentoProducto);
-                $('*[name="fechaNacimiento"]').val(stockProducto);
+                $('*[name="nombreProducto"]').val(nombreProducto);
+                $('*[name="descripcionEspecificaProducto"]').val(descripcionEspecifica);
+                $('*[name="descripcionGeneralProducto"]').val(descripcionGeneral);
+                $("select[name='estadoProducto'] option[value='"+estadoProducto+"']")[0].selected = true;
+                $('*[name="precioProducto"]').val(precioProducto);
+                $('*[name="descuentoProducto"]').val(descuentoProducto);
+                $('*[name="stockProducto"]').val(stockProducto);
 
                 if ( operacion != 'consultar' ) {
                     $('*[name="idProductoConsulta"]').val(idProducto);
                     $(".btnGuardarActualizar").removeClass("d-none");
                     $("#frmProductos .campoFormulario").attr("disabled", false);
                 } else {
+                    $('*[name="idProductoConsulta"]').removeAttr("value");
                     $(".btnGuardarActualizar").addClass("d-none");
                     $("#frmProductos .campoFormulario").attr("disabled", true);
                 }

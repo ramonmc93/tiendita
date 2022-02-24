@@ -49,6 +49,23 @@ class ProductoController extends Controller
     }
 
 
+    // --- Función para obtener la información del producto seleccionado.
+    public function obtenerDatosProducto( Request $request ) {
+
+        $idProducto = $request->idProducto;
+
+        $productoRow = DB::table('productos')
+        ->select('idproductos', 'nombre', 'descripcionespecifica', 'descripciongeneral', 'estadoproducto', 'precio', 'descuento', 'stock', 'fecharegistro', 'estado')
+        ->where('estado', '=', 'A')
+        ->where('idproductos', '=', $idProducto)
+        ->get();
+
+        $productoRow = $this->funcionesGenerales->parseQuery($productoRow);
+        print_r(json_encode($productoRow));
+
+    }
+
+
      // ---- Guardar nuevos productos.
      public function guardarProducto(Request $request) {
 
@@ -137,7 +154,7 @@ class ProductoController extends Controller
         } else {
 
             // --- Gurdar categoría.
-            if ( empty($idAdministradorConsulta) ) {
+            if ( empty($idProductoConsulta) ) {
                
                 // ---- Guardado
                 $estadoOperacion = Producto::guardarProducto($request);
@@ -150,21 +167,12 @@ class ProductoController extends Controller
 
             } else {
 
-                // --- Validación correo electrónico.
-                // var_dump($idAdministrador, $idAdministradorConsulta, $email);
-                // return;
-
-                if ( !empty($idAdministradorCorreo) && $idAdministradorCorreo != $idAdministradorConsulta ) {
-                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando actualizar no esta disponible." ) ) );
-                    return;
-                }
-
-                // --- Actualización administrador.
-                $estadoOperacion = Administrador::actualizarAdministrador($request);
+                // --- Actualización producto.
+                $estadoOperacion = Producto::actualizarProducto($request);
                 if ( $estadoOperacion ) {
-                    $arrayRespuestadoOperacion = array( "estado" => 'registroActualizacionCorrecto', "mensaje" => "El administrador fue actualizado correctamente." );
+                    $arrayRespuestadoOperacion = array( "estado" => 'registroActualizacionCorrecto', "mensaje" => "El producto fue actualizado correctamente." );
                 } else {
-                    $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible actualizar el administrador, si el problema persiste contacte al administrador del sistema." );
+                    $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible actualizar el producto, si el problema persiste contacte al administrador del sistema." );
                 }
 
                 print_r( json_encode( $arrayRespuestadoOperacion ) );

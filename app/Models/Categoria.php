@@ -42,6 +42,7 @@ class Categoria extends Model
 
         $estadoOperacion = DB::table('categorias')
         ->where('idcategorias', '=', $idCategoriaConsulta)
+        ->where('estado', '=', 'A')
         ->update([
             'nombre' => $nombreCategoria,
             'descripcion' => $descripcionCategoria,

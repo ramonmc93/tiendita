@@ -147,12 +147,12 @@ class Administrador extends Model
 
         $estadoOperacion = DB::table('administradores')
         ->where('idadministradores', '=', $idAdministradorConsulta)
+        ->where('estado', '=', 'A')
         ->update($arrayCamposActualizar);
 
         return $estadoOperacion;
         
     }
-
 
     // --- Función para eliminar el administrador
     public static function eliminarAdministrador($idAdministrador) {

@@ -59,4 +59,67 @@ class Producto extends Model
         
     }
 
+    public static function actualizarProducto($request) {
+        
+        $estadoActualizacion = false;
+
+        $nombreProducto = $request->nombreProducto;
+        $descripcionEspecificaProducto = $request->descripcionEspecificaProducto;
+        $descripcionGeneralProducto = $request->descripcionGeneralProducto;
+        $estadoProducto = $request->estadoProducto;
+        $precioProducto = $request->precioProducto;
+        $descuentoProducto = $request->descuentoProducto;
+        $stockProducto = $request->stockProducto;
+        $idCategoriaProducto = $request->categoriaProducto;
+        $idProductoConsulta = $request->idProductoConsulta;
+        $fechaActualizacion = date("Y-m-d H:i:s");
+        $estado = "A";
+        $idUsuarioRegistro = session('idAdministrador');
+
+        $arrayCamposActualizar = [
+            'nombre' => $nombreProducto,
+            'descripcionespecifica' => $descripcionEspecificaProducto,
+            'descripciongeneral' => $descripcionGeneralProducto,
+            'estadoproducto' => $estadoProducto,
+            'precio' => $precioProducto,
+            'descuento' => $descuentoProducto,
+            'stock' => $stockProducto,
+            'fechaactualizacion' => $fechaActualizacion,
+            'estado' => $estado,
+            'idusuarioregistro' => $idUsuarioRegistro,
+        ];
+
+        $estadoOperacion = DB::table('productos')
+        ->where('idproductos', '=', $idProductoConsulta)
+        ->where('estado', '=', 'A')
+        ->update($arrayCamposActualizar);
+        
+        // --- Actualización en tabla productos_categorias
+        if ( $estadoOperacion ) {
+
+            $estadoOperacion = DB::table('productos_categorias')
+            ->where('idproductosfk', '=', $idProductoConsulta)
+            ->where('estado', '=', 'A')
+            ->update([
+                'idcategoriasfk' => $idCategoriaProducto,
+                'fechaactualizacion' => $fechaActualizacion,
+                'estado' => $estado,
+                'idusuarioregistro' => $idUsuarioRegistro,
+            ]);
+            
+            if ( $estadoOperacion ) {
+                $estadoActualizacion = true;
+            } else {
+                $estadoActualizacion = false;
+            }
+
+
+        } else {
+            $estadoActualizacion = false;
+        }
+
+        return $estadoActualizacion;
+        
+    }
+
 }

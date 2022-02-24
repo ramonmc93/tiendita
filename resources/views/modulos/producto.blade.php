@@ -131,7 +131,7 @@
                                 <select 
                                 class="form-select campoFormulario obligatorio"
                                 name="estadoProducto">
-                                    <option value="0">---Seleccione---</option>
+                                    <option value="0" selected>---Seleccione---</option>
                                     <option value="nvo">Nuevo</option>
                                     <option value="udo">Usado</option>
                                 </select>
