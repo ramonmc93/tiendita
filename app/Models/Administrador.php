@@ -116,11 +116,12 @@ class Administrador extends Model
         $email = $request->email;
         $passw = "";
         $nombreUsuario = "";
+        $idAdministradorConsulta = $request->idAdministradorConsulta;
         $fechaRegistro = date("Y-m-d H:i:s");
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
-        $estadoOperacion = DB::table('administradores')->insert([
+        $estadoOperacion = DB::table('administradores')->update([
             'nombre' => $nombre,
             'apellidopaterno' => $apellidoPaterno,
             'apellidomaterno' => $apellidoMaterno,
@@ -136,8 +137,9 @@ class Administrador extends Model
             'fecharegistro' => $fechaRegistro,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
-        ]);
-
+        ])
+        ->where('idadministradores', $idAdministradorConsulta);
+            
         return $estadoOperacion;
         
     }

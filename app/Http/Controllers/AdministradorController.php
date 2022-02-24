@@ -202,25 +202,43 @@ class AdministradorController extends Controller
                 ->get();
     
             $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
-            if ( !empty($administradorRow[0]["idadministradores"]) ) {
-                print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que está intentando registrar ya existe." ) ) );
-                return;
-            }
+            $idAdministrador = $administradorRow[0]["idadministradores"];
             
             // --- Gurdar administrador.
             if ( empty($idAdministradorConsulta) ) {
 
+                // --- Validación correo electrónico.
+                if ( !empty($idAdministrador) ) {
+                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
+                    return;
+                }
+                
+                // ---- Guardado
                 $estadoOperacion = Administrador::guardarAdministrador($request);
                 if ( $estadoOperacion ) {
                     print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue registrado correctamente." ) ) );
+                }else {
+                    $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible registrar el administrador, si el problema persiste contacte al administrador del sistema." );
                 }
 
             } else {
+
+                // --- Validación correo electrónico.
+                if ( $idAdministrador != $idAdministradorConsulta ) {
+                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
+                    return;
+                }
+
                 // --- Actualización administrador.
                 $estadoOperacion = Administrador::actualizarAdministrador($request);
                 if ( $estadoOperacion ) {
-                    print_r( json_encode( array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue actualizado correctamente." ) ) );
+                    $arrayRespuestadoOperacion = array( "estado" => 'registroCorrecto', "mensaje" => "El administrador fue actualizado correctamente." );
+                } else {
+                    $arrayRespuestadoOperacion = array( "estado" => false, "mensaje" => "No fue posible actualizar el administrador, si el problema persiste contacte al administrador del sistema." );
                 }
+
+                print_r( json_encode( $arrayRespuestadoOperacion ) );
+
             }
 
         }

@@ -45,6 +45,17 @@ window.addEventListener("DOMContentLoaded", function(){
 
                     }
 
+                    if ( data["estado"] == false ) {
+
+                        $("#modalAdmnistrador").modal("hide");
+
+                        bootbox.alert({
+                            message: data["mensaje"],
+                            className: 'd-flex align-items-center'
+                        });
+
+                    }
+
                 }
                 
             });
@@ -139,7 +150,8 @@ window.addEventListener("DOMContentLoaded", function(){
     $(document).on("click", ".btnConsultar", function(){
 
         let idAdministrador = $(this).data("id-administrador");
-        
+        recetearCamposValidaciones( "#frmAdministradores" );
+
         $.ajax({
                 
             url:"/administrador/datos",
