@@ -123,4 +123,27 @@ class Producto extends Model
         
     }
 
+    // --- Función para eliminar el producto seleccionado.
+    public static function eliminarProducto($idProducto) {
+
+        $fechaActualizacion = date("Y-m-d H:i:s");
+        $estado = "E";
+        $idUsuarioElimino = session('idAdministrador');
+        
+        $estadoOperacion = DB::table('productos')
+        ->join('productos_categorias', 'productos.idproductos', '=', 'productos_categorias.idproductosfk')
+        ->where('productos.idproductos', '=', $idProducto)
+        ->update([
+            'productos.fechaactualizacion' => $fechaActualizacion,
+            'productos.estado' => $estado,
+            'productos.idusuarioelimino' => $idUsuarioElimino,
+            'productos_categorias.fechaactualizacion' => $fechaActualizacion,
+            'productos_categorias.estado' => $estado,
+            'productos_categorias.idusuarioelimino' => $idUsuarioElimino,
+        ]);
+
+        return $estadoOperacion;
+
+    }
+
 }

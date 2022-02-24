@@ -68,8 +68,8 @@ class ProductoController extends Controller
     }
 
 
-     // ---- Guardar nuevos productos.
-     public function guardarProducto(Request $request) {
+    // ---- Guardar nuevos productos.
+    public function guardarProducto(Request $request) {
 
         $nombreProducto = trim($request->nombreProducto);
         $descripcionEspecificaProducto = trim($request->descripcionEspecificaProducto);
@@ -189,6 +189,70 @@ class ProductoController extends Controller
             }
 
         }
+
+    }
+
+
+    // --- Eliminar producto
+    public function eliminarProducto(Request $request) {
+
+        $idProducto = $request->idProducto;
+        $idAdministradorSesion = session('idAdministrador');
+
+        // ---- Validaciones
+        $arrayInputs = [
+            'idProducto' => $idProducto
+        ];
+
+        $arrayValidations = [
+            'idProducto' => 'required|gt:0'
+        ];
+
+        $validator = Validator::make($arrayInputs, $arrayValidations);
+        $arrayEstadoRespuesta = array();
+        if ( !$validator->passes() ) {
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $validator->messages()];
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+        
+        /**
+        * Otras validaciones
+        */
+        // ---- Validar que el producto exista.
+        $productoRows = DB::table('productos')
+        ->select('idproductos')
+        ->where('idproductos', '=', $idProducto)
+        ->where('estado', '=', 'A')
+        ->get();
+
+        $idProductoConsulta = "";
+        $idProducto = $this->funcionesGenerales->parseQuery($productoRows);
+        if ( !empty($idProducto[0]["idproductos"]) ) {
+            $idProductoConsulta = $idProducto[0]["idproductos"];
+        }
+
+
+        if ( empty($idProductoConsulta) ) {
+            $arrayTextoValidaciones["idProducto"][0] = "El producto que esta intentando eliminar no existe.";
+            $arrayEstadoRespuesta = ["estado" => 'validaciones', "validaciones" => $arrayTextoValidaciones];
+        }
+        
+        if ( !empty($arrayEstadoRespuesta) ) {
+            print_r(json_encode($arrayEstadoRespuesta));
+            return;
+        }
+
+        // --- Se elimina
+        $estadoEliminacion = Producto::eliminarProducto($idProducto);
+
+        if ( $estadoEliminacion ) {
+            $arrayEstadoRespuesta = ["estado" => true, "mensaje" => "Producto eliminado correctamente."];
+        } else {
+            $arrayEstadoRespuesta = ["estado" => false, "mensaje" => "No se pudo eliminar el producto, si el problema persiste contacte al administrador del sistema."];
+        }
+
+        print_r(json_encode($arrayEstadoRespuesta ));
 
     }
 

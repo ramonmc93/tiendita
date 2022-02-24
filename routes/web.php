@@ -76,7 +76,7 @@ Route::middleware(['existe-sesion-activa'])->group(function () {
     Route::post('/productos/guardar-modificar', [ProductoController::class, 'guardarProducto']);
     Route::post('/productos/datos', [ProductoController::class, 'obtenerDatosProductos']);
     Route::post('/producto/datos', [ProductoController::class, 'obtenerDatosProducto']);
-
+    Route::post('/producto/eliminar', [ProductoController::class, 'eliminarProducto']);
     
 
 });

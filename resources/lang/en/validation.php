@@ -237,6 +237,10 @@ return [
             'numeric' => "El descuento para el producto debe ser numérico entre 0 y 100.",
             'digits_between' => "El descuento para el producto debe ser numérico entre 0 y 100.",
         ],
+        'idProducto' => [
+            'required' => 'El producto que esta intentando eliminar no existe.',
+            'gt' => 'El producto que esta intentando eliminar no existe.'
+        ],
 
     ],
 
