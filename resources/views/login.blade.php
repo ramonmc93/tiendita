@@ -50,7 +50,7 @@
                         name="password">
                         <button 
                         type="button" 
-                        class="btn-ct-inp d-flex-center borderNBR btnPrimero btnMostrarPassword" 
+                        class="btn-ct-inp d-flex-center borderNBR btnPrimero btnMostrarPassword d-none" 
                         data-input-name="password" 
                         data-ocultar-password="false">
                             <li class="ico-ojo esclerotica d-flex-center">
@@ -83,6 +83,7 @@
     <script src="{{asset('js/librerias/bootbox/dist/bootbox.min.js')}}"></script>
     <script src="{{asset('js/librerias/bootbox/dist/bootbox.locales.min.js')}}"></script>
     {{--bootbox code end --}}
+    <script src="{{asset('js/funcionesGenerales.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/modulos/login.js')}}"></script>
 </body>

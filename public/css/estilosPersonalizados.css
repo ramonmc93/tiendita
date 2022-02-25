@@ -852,6 +852,10 @@ label {
     top: 0!important;
 }
 
+.d-none {
+    display: none!important;
+}
+
 /*Flex*/
 .flex {
     display: flex;

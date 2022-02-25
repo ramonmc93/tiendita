@@ -33,3 +33,20 @@ function validarCodigoPostal(codigoPostal) {
     return false;
     
 }
+
+
+// --- Mostrar contraseña
+$(document).on("click", ".btnMostrarPassword", function(){
+    var boolOcultarPassword = $(this)[0].dataset.ocultarPassword;
+    var inputName = $(this).data("input-name");
+    var inputTypePassword = $("input[name="+inputName+"]");
+    
+    if ( boolOcultarPassword == "false" ) {
+        inputTypePassword.attr({type:"mostrarPassword"});
+        $(this).attr({"data-ocultar-password":true});
+
+    } if ( boolOcultarPassword == "true" ) {
+        inputTypePassword.attr({type:"password"});
+        $(this).attr({"data-ocultar-password":false});
+    }
+});
