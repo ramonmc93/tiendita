@@ -60,9 +60,15 @@ class ProductoController extends Controller
         ->get();
 
         $productoRows = $this->funcionesGenerales->parseQuery($productoRows);
-        return view("index", ["productoRows" => $productoRows]);
+        if ( empty($tipoPeticion) ) {
+            return view("index", ["productoRows" => $productoRows]);
+            
+        } if ($tipoPeticion == "post" ) {
+            return view("cards-productos-registrados", ["productoRows" => $productoRows]);
+        }
 
     }
+
 
     // --- Función para obtener la información del producto seleccionado.
     public function obtenerDatosProducto( Request $request ) {

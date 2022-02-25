@@ -52,3 +52,8 @@
         
     @endsection
 
+    {{-- Scripts módulos/otros --}}
+    @section('scripts-modulos-otros')
+        <script src="{{asset('js/index.js')}}"></script>
+    @endsection
+

@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductoController;
  * Template e index.
  */
 Route::get('/', [ProductoController::class, 'obtenerDatosProductosIndex']);
+Route::post('/producto/registrados-cargar-cards', [ProductoController::class, 'obtenerDatosProductosIndex']);
 
 Route::get('/template', function () {
     return view('layouts/template');
