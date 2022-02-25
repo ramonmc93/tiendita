@@ -44,6 +44,8 @@ Route::get('/login', function(){
     return view("login");
 })->middleware(['mostrar-modulo-productos']);
 
+// Cerrar sesión
+Route::post('/usuario/cerrar-sesion', [AdministradorController::class, 'cerrarSesionValidacion']);
 
 
 /**

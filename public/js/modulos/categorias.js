@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", function(){
         try {
             
             let frmCategoria = $("#frmCategorias").serialize();
-            recetearCamposValidaciones("#frmCategorias");
             
             $.ajax({
                 
@@ -38,7 +37,8 @@ window.addEventListener("DOMContentLoaded", function(){
                             message: data["mensaje"],
                             className: 'd-flex align-items-center'
                         });
-
+                        
+                        recetearCamposValidaciones("#frmCategorias");
                         actualizarTablaCategorias();
 
                     }

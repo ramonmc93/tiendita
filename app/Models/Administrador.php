@@ -170,5 +170,12 @@ class Administrador extends Model
         return $estadoOperacion;
 
     }
+
+    public function cerrarSesion() {
+
+        Session::flush();
+        return true;
+
+    }
     
 }

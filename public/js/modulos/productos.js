@@ -14,7 +14,6 @@ window.addEventListener("DOMContentLoaded", function(){
         try {
             
             let frmProducto = $("#frmProductos").serialize();
-            recetearCamposValidaciones("#frmProductos");
             
             $.ajax({
                 
@@ -39,6 +38,7 @@ window.addEventListener("DOMContentLoaded", function(){
                             className: 'd-flex align-items-center'
                         });
 
+                        recetearCamposValidaciones("#frmProductos");
                         actualizarTablaProductos();
 
                     }

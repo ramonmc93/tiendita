@@ -378,4 +378,23 @@ class AdministradorController extends Controller
 
     }
 
+
+    // Cerrar sesión
+    public function cerrarSesionValidacion() {
+
+        if ( !empty(session('idAdministrador')) ) {
+
+            $estadoCerrarSesion = $this->modeloAdministrador->cerrarSesion();
+            $arrayRespuesta = array();
+
+            if ( !$estadoCerrarSesion ) {
+                $arrayRespuesta = ["estado" => false, "mensaje" => "No fue posible terminar la sesión, intente de nuevo y si el problema persiste contacte al administrador del sistema."];
+            }
+
+            return $arrayRespuesta;
+
+        }
+
+    }  
+
 }

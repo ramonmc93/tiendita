@@ -17,7 +17,6 @@ window.addEventListener("DOMContentLoaded", function(){
         try {
             
             let frmAdministrador = $("#frmAdministradores").serialize();
-            recetearCamposValidaciones("#frmAdministradores");
             
             $.ajax({
                 
@@ -46,6 +45,7 @@ window.addEventListener("DOMContentLoaded", function(){
                             className: 'd-flex align-items-center'
                         });
 
+                        recetearCamposValidaciones("#frmAdministradores");
                         actualizarTablaAdministradores();
 
                     }
