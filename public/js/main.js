@@ -68,7 +68,7 @@ function mostrarErrorValidaciones( frm = "", data, type = 0 ) {
         
         for ( let propName of arrayPropiedadName ) {   
             
-            console.log(propName);
+            // console.log(propName);
 
             let validacion = dataType0.validaciones[propName];     
             let campoActual = $("*[name='"+propName+"']");

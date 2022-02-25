@@ -183,10 +183,12 @@ window.addEventListener("DOMContentLoaded", function(){
                     $('*[name="idProductoConsulta"]').val(idProducto);
                     $(".btnGuardarActualizar").removeClass("d-none");
                     $("#frmProductos .campoFormulario").attr("disabled", false);
+                    $(".btnActualizarSelectCategorias").removeClass("d-none");
                 } else {
                     $('*[name="idProductoConsulta"]').removeAttr("value");
                     $(".btnGuardarActualizar").addClass("d-none");
                     $("#frmProductos .campoFormulario").attr("disabled", true);
+                    $(".btnActualizarSelectCategorias").addClass("d-none");
                 }
 
             }
