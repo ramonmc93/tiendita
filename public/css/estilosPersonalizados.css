@@ -1063,15 +1063,16 @@ label {
     border-color: var(--colorPrimarioPrincipal);
 }
 
-.btnEditar, .btnGuardarActualizar, .bootbox-accept, .btnActualizarTabla {
+.btnEditar, .btnGuardarActualizar, .bootbox-accept, .btnActualizarTabla, .btnActualizarSelectCategorias {
     background-color: var(--colorSecundarioSegundo);
     border-color: var(--colorSecundarioSegundo);
 }
 
-.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus, .bootbox-accept:hover, .bootbox-accept:focus, 
+.btnEditar:hover, .btnEditar:focus, .btnGuardarActualizar:hover, .btnGuardarActualizar:focus, 
+.bootbox-accept:hover, .bootbox-accept:focus, .btnActualizarSelectCategorias:hover, .btnActualizarSelectCategorias:focus,
 .btnActualizarTabla:hover, .btnActualizarTabla:focus {
-    background-color: var(--colorSecundarioPrincipal);
-    border-color: var(--colorSecundarioPrincipal);
+    background-color: var(--colorSecundarioPrincipal)!important;
+    border-color: var(--colorSecundarioPrincipal)!important;
 }
 
 .btnEliminar {

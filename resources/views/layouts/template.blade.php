@@ -76,6 +76,12 @@
                             </li>
                         @endif
 
+                        @if ( $nombreVista != "modulos.categoria-producto" )
+                            <li>
+                                <a href="/modulos/categorias">Módulo de categorías</a>
+                            </li>
+                        @endif
+
                         @if ( $nombreVista != "modulos.producto" )
                             <li>
                                 <a href="/modulos/productos">Módulo de productos</a>
