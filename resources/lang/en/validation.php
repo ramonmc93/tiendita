@@ -194,6 +194,16 @@ return [
             'required' => 'El administrador que esta intentando eliminar no existe.',
             'gt' => 'El administrador que esta intentando eliminar no existe.'
         ],
+        'nombreUsuario' => [
+            'required' => 'El nombre de usuario es obligatorio.',
+            'min' => 'El nombre de usuario debe de tener una longitud mínima de 5 caracteres.',
+            'max' => 'El nombre de usuario debe de tener una longitud máxima de 25 caracteres.',
+        ],
+        'passwordAdministrador' => [
+            'required' => 'La contraseña es obligatoria.',
+            // 'password' => 'La contraseña debe de tener un formato válido convinando símbolos, letras y números.',
+            'min' => 'La contraseña debe de tener una longitud mínima de 5 caracteres.',
+        ],
         
         // Módulo categorías
         'nombreCategoria' => [

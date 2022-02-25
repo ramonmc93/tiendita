@@ -180,7 +180,8 @@ window.addEventListener("DOMContentLoaded", function(){
                 let tipoUsuario = data.tipousuario;
                 let email = data.email;
                 let idAdministrador = data.idadministradores;
-                                
+                let nombreUsuario = data.nombreusuario;
+
                 $('*[name="nombre"]').val(nombre);
                 $('*[name="apellidoPaterno"]').val(apellidoPaterno);
                 $('*[name="apellidoMaterno"]').val(apellidoMaterno);
@@ -190,6 +191,7 @@ window.addEventListener("DOMContentLoaded", function(){
                 $('*[name="fechaNacimiento"]').val(fechaNacimiento);
                 $('*[name="direccion"]').val(direccion);
                 $('*[name="codigoPostal"]').val(codigoPostal);
+                $('*[name="nombreUsuario"]').val(nombreUsuario);
 
                 if ( operacion != 'consultar' ) {
                     $('*[name="idAdministradorConsulta"]').val(idAdministrador);

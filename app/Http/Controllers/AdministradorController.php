@@ -59,6 +59,12 @@ class AdministradorController extends Controller
         $direccion = trim($request->direccion);
         $codigoPostal = trim($request->codigoPostal);
         $idAdministradorConsulta = trim($request->idAdministradorConsulta);
+        $nombreUsuario = trim($request->nombreUsuario);
+        $passwordAdministrador = trim($request->passwordAdministrador);
+
+        if ( empty($apellidoMaterno) ) {
+            $request->apellidoMaterno = "";    
+        }
 
         // ---- Validaciones
         $arrayInputs = [
@@ -68,7 +74,8 @@ class AdministradorController extends Controller
             'email' => $email,
             'fechaNacimiento' => $fechaNacimiento,
             'direccion' => $direccion,
-            'codigoPostal' => $codigoPostal
+            'codigoPostal' => $codigoPostal,
+            'nombreUsuario' => $nombreUsuario
         ];
 
         $arrayValidations = [
@@ -78,8 +85,14 @@ class AdministradorController extends Controller
             'email' => 'required|email',
             'fechaNacimiento' => 'required|date',
             'direccion' => 'required|min:15',
-            'codigoPostal' => 'required|numeric|digits_between:5,5'
+            'codigoPostal' => 'required|numeric|digits_between:5,5',
+            'nombreUsuario' => 'required|min:5|max:25'
         ];
+        
+        if ( empty($idAdministradorConsulta) || !empty($passwordAdministrador) ) {
+            $arrayInputs["passwordAdministrador"] = $passwordAdministrador;
+            $arrayValidations["passwordAdministrador"] = 'required|min:5';
+        }
         
         if ( !empty($telCasa) ) {
             $arrayInputs['telCasa'] = $telCasa;

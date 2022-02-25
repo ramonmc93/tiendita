@@ -32,7 +32,7 @@ function recetearCamposValidaciones( idFormulario = "" ) {
         notificacionesError.addClass("d-none");
         let contenedorNotificaciones = $(".contenedorNotificaciones");
         contenedorNotificaciones.empty();
-    
+        $("form .campoFormulario").val("");
         $(idFormulario+" *.invalido").removeClass("invalido");
 
     }

@@ -214,6 +214,22 @@
                                 </div>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
+                            <div class="col-12 col-md-4">
+                                <label for="nombreUsuario">Nombre de usuario:</label>
+                                <input 
+                                class="form-control campoFormulario obligatorio"
+                                type="text" 
+                                name="nombreUsuario">
+                                <span class="campoObligatorio">Este campo es obligatorio</span>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="passwordAdministrador">Contraseña:</label>
+                                <input 
+                                class="form-control campoFormulario obligatorio"
+                                type="password" 
+                                name="passwordAdministrador">
+                                <span class="campoObligatorio">Este campo es obligatorio</span>
+                            </div>
                         </div>
                     </div>
                     <input 

@@ -74,13 +74,13 @@ class Administrador extends Model
         $telCasa = $request->telCasa;
         $tipoUsuario = $request->tipoUsuario;
         $email = $request->email;
-        $passw = "";
-        $nombreUsuario = "";
+        $nombreUsuario = $request->nombreUsuario;
+        $passwordAdministrador = password_hash($request->passwordAdministrador, PASSWORD_DEFAULT);
         $fechaRegistro = date("Y-m-d H:i:s");
         $estado = "A";
         $idUsuarioRegistro = session('idAdministrador');
 
-        $estadoOperacion = DB::table('administradores')->insert([
+        $camposQuery = [
             'nombre' => $nombre,
             'apellidopaterno' => $apellidoPaterno,
             'apellidomaterno' => $apellidoMaterno,
@@ -91,13 +91,14 @@ class Administrador extends Model
             'telcasa' => $telCasa,
             'tipousuario' => $tipoUsuario,
             'email' => $email,
-            'passw' => $passw,
+            'passw' => $passwordAdministrador,
             'nombreusuario' => $nombreUsuario,
             'fecharegistro' => $fechaRegistro,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
-        ]);
+        ];
 
+        $estadoOperacion = DB::table('administradores')->insert($camposQuery);
         return $estadoOperacion;
         
     }
@@ -114,8 +115,8 @@ class Administrador extends Model
         $telCasa = $request->telCasa;
         $tipoUsuario = $request->tipoUsuario;
         $email = $request->email;
-        $passw = "";
-        $nombreUsuario = "";
+        $nombreUsuario = $request->nombreUsuario;
+        $passwordAdministrador = $request->passwordAdministrador;
         $idAdministradorConsulta = $request->idAdministradorConsulta;
         $fechaActualizacion = date("Y-m-d H:i:s");
         $estado = "A";
@@ -135,14 +136,11 @@ class Administrador extends Model
             'fechaactualizacion' => $fechaActualizacion,
             'estado' => $estado,
             'idusuarioregistro' => $idUsuarioRegistro,
+            'nombreusuario' => $nombreUsuario
         ];
 
-        if ( !empty($passw) ) {
-            $arrayCamposActualizar['passw'] = $passw;
-        }
-
-        if ( !empty($nombreUsuario) ) {
-            $arrayCamposActualizar['nombreusuario'] = $nombreUsuario;
+        if ( !empty($passwordAdministrador) ) {
+            $arrayCamposActualizar['passw'] = password_hash($passwordAdministrador, PASSWORD_DEFAULT);
         }
 
         $estadoOperacion = DB::table('administradores')
