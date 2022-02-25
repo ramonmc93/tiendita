@@ -48,6 +48,21 @@ class ProductoController extends Controller
 
     }
 
+    // --- Función para obtener los datos de los productos, index.
+    public function obtenerDatosProductosIndex( Request $request ) {
+        
+        $tipoPeticion = $request->tipoPeticion;
+
+        $productoRows = DB::table('productos')
+        ->select('idproductos', 'nombre', 'precio', 'descuento', 'stock')
+        ->where('estado', '=', 'A')
+        ->orderBy('idproductos', 'desc')
+        ->get();
+
+        $productoRows = $this->funcionesGenerales->parseQuery($productoRows);
+        return view("index", ["productoRows" => $productoRows]);
+
+    }
 
     // --- Función para obtener la información del producto seleccionado.
     public function obtenerDatosProducto( Request $request ) {
