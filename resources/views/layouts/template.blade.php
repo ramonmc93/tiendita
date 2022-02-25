@@ -145,6 +145,7 @@
         <script src="{{asset('js/plugins/moment/moment.js')}}"></script>
         <script src="{{asset('js/plugins/moment/locale.js')}}"></script>
         <script src="{{asset('js/plugins/tempusdominus/tempusdominus-bootstrap-4.min.js')}}"></script>
+        <script src="{{asset('js/funcionesGenerales.js')}}"></script>
         <script src="{{asset('js/main.js')}}"></script>
         <script src="{{asset('js/modulos/login.js')}}"></script>
         @yield('scripts-modulos-otros')

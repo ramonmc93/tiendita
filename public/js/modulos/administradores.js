@@ -14,8 +14,96 @@ window.addEventListener("DOMContentLoaded", function(){
     // ---- Guardar / Modificar administrador.
     $(document).on("click", ".btnGuardarActualizar", function(){
 
+        $("#frmAdministradores *.invalido").removeClass("invalido");
+        $(".contenedorNotificaciones").empty();
+
         try {
             
+            let campoNombreAdministrador = $("input[name='nombre']");
+            let nombreAdministradorValor = campoNombreAdministrador.val().trim();
+            if ( nombreAdministradorValor.length < 3 || nombreAdministradorValor.length > 25 ) {
+                campoNombreAdministrador.addClass("invalido");
+                throw 'El nombre no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.';
+            }
+
+            let campoApellidoPaternoAdministrador = $("input[name='apellidoPaterno']");
+            let apellidoPaternoAdministradorValor = campoApellidoPaternoAdministrador.val().trim();
+            if ( apellidoPaternoAdministradorValor.length < 3 || apellidoPaternoAdministradorValor.length > 25 ) {
+                campoApellidoPaternoAdministrador.addClass("invalido");
+                throw 'El apellido paterno no puede ser vacío y debe de tener una longitud mínima de 3 caracteres máximo 25.';
+            }
+
+            let campoApellidoMaternoAdministrador = $("input[name='apellidoMaterno']");
+            let apellidoMaternoAdministradorValor = campoApellidoMaternoAdministrador.val().trim();
+            if ( apellidoMaternoAdministradorValor != "" && (apellidoMaternoAdministradorValor.length < 3 || apellidoMaternoAdministradorValor.length > 25) ) {
+                campoApellidoMaternoAdministrador.addClass("invalido");
+                throw 'El apellido materno debe de tener una longitud mínima de 3 caracteres máximo 25.';
+            }
+
+            let campoTelefonoCelularAdministrador = $("input[name='telCelular']");
+            let telefonoCelularAdministradorValor = campoTelefonoCelularAdministrador.val().trim();
+            if ( telefonoCelularAdministradorValor.length < 10 || !validarNumeroEntero(telefonoCelularAdministradorValor) ) {
+                campoTelefonoCelularAdministrador.addClass("invalido");
+                throw 'El teléfono celulular debe ser numérico de 10 dígitos.';
+            }
+
+            let campoTelefonoCasaAdministrador = $("input[name='telCasa']");
+            let telefonoCasaAdministradorValor = campoTelefonoCasaAdministrador.val().trim();
+            if ( telefonoCasaAdministradorValor != "" && telefonoCasaAdministradorValor.length < 10 && !validarNumeroEntero(telefonoCasaAdministradorValor) ) {
+                campoTelefonoCasaAdministrador.addClass("invalido");
+                throw 'El teléfono de casa debe ser numérico de 10 dígitos.';
+            }
+
+            let campoEmailAdministrador = $("input[name='email']");
+            let emailAdministradorValor = campoEmailAdministrador.val().trim();
+            if ( !validacionCorreoElectronico(emailAdministradorValor) ) {
+                campoEmailAdministrador.addClass("invalido");
+                throw 'El correo electrónico es incorrecto.';
+            }
+
+            let campoFechaNacimientoAdministrador = $("input[name='fechaNacimiento']");
+            let fechaNacimientoAdministradorValor = campoFechaNacimientoAdministrador.val().trim();
+            if (fechaNacimientoAdministradorValor == "" || !( moment( new Date(fechaNacimientoAdministradorValor) ).isValid() ) ) {
+                campoFechaNacimientoAdministrador.addClass("invalido");
+                throw "La fecha de nacimiento es incorrecta.";
+            }
+
+            let campoDireccionAdministrador = $("textarea[name='direccion']");
+            let direccionAdministradorValor = campoDireccionAdministrador.val().trim();
+            if (direccionAdministradorValor == "" || direccionAdministradorValor.length < 15) {
+                campoDireccionAdministrador.addClass("invalido");
+                throw "La dirección debe de tener una longitud mínima de 15 caracteres.";
+            }
+
+            let campoCodigoPostalAdministrador = $("input[name='codigoPostal']");
+            let codigoPostalAdministradorValor = campoCodigoPostalAdministrador.val().trim();
+            if (!validarCodigoPostal(codigoPostalAdministradorValor)) {
+                campoCodigoPostalAdministrador.addClass("invalido");
+                throw "El código postal es incorrecto.";
+            }
+
+            let campoTipoUsuarioAdministrador = $("input[name='tipoUsuario']:checked");
+            let tipoUsuarioAdministradorValor = campoTipoUsuarioAdministrador.val().trim();
+            if (tipoUsuarioAdministradorValor != "SA" && tipoUsuarioAdministradorValor != "A") {
+                campoTipoUsuarioAdministrador.parent().parent().addClass("invalido");
+                throw "El tipo de usuario seleccionado es incorrecto.";
+            }
+
+            let campoNombreUsuarioAdministrador = $("input[name='nombreUsuario']");
+            let nombreUsuarioAdministradorValor = campoNombreUsuarioAdministrador.val().trim();
+            if ( nombreUsuarioAdministradorValor.length < 5 || nombreUsuarioAdministradorValor.length > 25 ) {
+                campoNombreUsuarioAdministrador.addClass("invalido");
+                throw "El nombre de usuario debe de tener una longitud mínima de 5 caracteres y máxima de 25 caracteres.";
+            }
+
+            let idAdministradorConsulta = $("input[name='idAdministradorConsulta']").val().trim();
+            let campoPasswordAdministrador = $("input[name='passwordAdministrador']");
+            let passwordAdministradorValor = campoPasswordAdministrador.val().trim();
+            if ( passwordAdministradorValor.length < 5 && idAdministradorConsulta == "" ) {
+                campoPasswordAdministrador.addClass("invalido");
+                throw "La contraseña debe de tener una longitud mínima de 5 caracteres.";
+            }
+
             let frmAdministrador = $("#frmAdministradores").serialize();
             
             $.ajax({
@@ -32,7 +120,8 @@ window.addEventListener("DOMContentLoaded", function(){
                         }
                     }
 
-                    if ( data["estado"] == "email" ) {
+                    if ( data["estado"] == "email" || data["estado"] == "nombreUsuario" ) {
+                        $("input[name='"+data["estado"]+"']").addClass("invalido");
                         mostrarMensajeError( data["mensaje"] );
                     }
 
@@ -69,7 +158,7 @@ window.addEventListener("DOMContentLoaded", function(){
 
             bootbox.alert({
                 message: error,
-                className: 'd-flex align-items-center'
+                className: 'd-flex align-items-center colorFondoError'
             });
 
         }

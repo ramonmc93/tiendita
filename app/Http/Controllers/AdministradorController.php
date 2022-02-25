@@ -143,6 +143,19 @@ class AdministradorController extends Controller
             if ( !empty($administradorRow) ) {
                 $idAdministradorCorreo = $administradorRow[0]["idadministradores"];
             }
+
+            // --- Validar que el nombre de usuario no exista.
+            $administradorRow = DB::table('administradores')
+                ->select('idadministradores')
+                ->where('nombreusuario', '=', $nombreUsuario)
+                ->where('estado', '=', 'A')
+                ->get();
+    
+            $administradorRow = $this->funcionesGenerales->parseQuery($administradorRow);
+            $idAdministradorNombreUsuaro = "";
+            if ( !empty($administradorRow) ) {
+                $idAdministradorNombreUsuaro = $administradorRow[0]["idadministradores"];
+            }
             
             // --- Gurdar administrador.
             if ( empty($idAdministradorConsulta) ) {
@@ -150,6 +163,12 @@ class AdministradorController extends Controller
                 // --- Validación correo electrónico.
                 if ( !empty($idAdministradorCorreo) ) {
                     print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
+                    return;
+                }
+
+                // --- Validación nombre de usuario.
+                if ( !empty($idAdministradorNombreUsuaro) ) {
+                    print_r( json_encode( array( "estado" => 'nombreUsuario', "mensaje" => "El nombre de usuario que esta intentando registrar no esta disponible." ) ) );
                     return;
                 }
                 
@@ -164,11 +183,14 @@ class AdministradorController extends Controller
             } else {
 
                 // --- Validación correo electrónico.
-                // var_dump($idAdministrador, $idAdministradorConsulta, $email);
-                // return;
-
                 if ( !empty($idAdministradorCorreo) && $idAdministradorCorreo != $idAdministradorConsulta ) {
-                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando actualizar no esta disponible." ) ) );
+                    print_r( json_encode( array( "estado" => 'email', "mensaje" => "El correo electrónico que esta intentando registrar no esta disponible." ) ) );
+                    return;
+                }
+
+                // --- Validación nombre de usuario.
+                if ( !empty($idAdministradorNombreUsuaro) && $idAdministradorNombreUsuaro != $idAdministradorConsulta ) {
+                    print_r( json_encode( array( "estado" => 'nombreUsuario', "mensaje" => "El nombre de usuario que esta intentando registrar no esta disponible." ) ) );
                     return;
                 }
 

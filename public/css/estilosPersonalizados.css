@@ -1119,6 +1119,10 @@ label {
     display: block;
 }
 
+.colorFondoError {
+    background: #ff00002e;
+}
+
 /* Campo obligatorio */
 .campoObligatorio {
 	font-size: 10px;
