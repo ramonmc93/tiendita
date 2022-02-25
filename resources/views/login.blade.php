@@ -36,7 +36,7 @@
                         <label for="Nombre de usuario">Nombre de usuario o correo electrónico:</label>
                         <input 
                         type="text"
-                        class="form-control obligatorio" 
+                        class="form-control campoFormulario obligatorio" 
                         id="correoUsuario" 
                         name="correoUsuario"
                         placeholder="usuario/email">
@@ -45,7 +45,7 @@
                         <label for="Contraseña">Contraseña:</label>
                         <input 
                         type="password" 
-                        class="form-control obligatorio" 
+                        class="form-control campoFormulario obligatorio" 
                         id="password" 
                         name="password">
                         <button 
