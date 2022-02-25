@@ -45,7 +45,7 @@ class CategoriaController extends Controller
 
 
     // --- Función para obtener los datos de las categorías.
-    public static function obtenerDatosCategoriasSelect() {
+    public static function obtenerDatosCategoriasSelect($metodo = "post") {
     
         $categoriasRows = DB::table('categorias')
         ->select('idcategorias', 'nombre')
@@ -54,7 +54,12 @@ class CategoriaController extends Controller
         ->get();
 
         $categoriasRows = FuncionesGenerales::parseQuery($categoriasRows);
-        return $categoriasRows;
+
+        if ( $metodo == 'get' ) {
+            return $categoriasRows;
+        } else {
+           return view('select-categorias', ["categoriasRows" => $categoriasRows]); 
+        }
 
     }
 

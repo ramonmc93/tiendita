@@ -163,18 +163,27 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <label for="categoriaProducto">Categoría:</label>
-                                <select 
-                                class="form-select campoFormulario obligatorio"
-                                name="categoriaProducto">
-                                    <option value="0">---Seleccione---</option>
-                                    @foreach ($categoriasRows as $rowCategoria)
-                                        @php
-                                            $idCategoria = $rowCategoria["idcategorias"];
-                                            $nombreCategoria = $rowCategoria["nombre"];
-                                        @endphp
-                                        <option value="{{$idCategoria}}">{{$nombreCategoria}}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col-12 text-align-center mb-1">
+                                    <button
+                                    class="btn btn-primary btnActualizarSelectCategorias"
+                                    type="button">
+                                        Actualizar
+                                    </button>
+                                </div>
+                                <div class="contenedorSelectCategorias">
+                                    <select 
+                                    class="form-select campoFormulario obligatorio"
+                                    name="categoriaProducto">
+                                        <option value="0">---Seleccione---</option>
+                                        @foreach ($categoriasRows as $rowCategoria)
+                                            @php
+                                                $idCategoria = $rowCategoria["idcategorias"];
+                                                $nombreCategoria = $rowCategoria["nombre"];
+                                            @endphp
+                                            <option value="{{$idCategoria}}">{{$nombreCategoria}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <span class="campoObligatorio">Este campo es obligatorio</span>
                             </div>
                         </div>

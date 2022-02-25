@@ -265,4 +265,21 @@ window.addEventListener("DOMContentLoaded", function(){
 
     });
 
+
+    // --- Actualizar select categorías.
+    $(document).on("click", ".btnActualizarSelectCategorias", function(){
+
+        $.ajax({
+                
+            url:"/producto/select-categorias",
+            method:"POST",
+            dataType:"html",
+            success:function(data){
+                $(".contenedorSelectCategorias").empty().html(data);
+            }
+
+        });
+
+    });
+
 });

@@ -42,7 +42,7 @@ class ProductoController extends Controller
             print_r(json_encode($productoRows));
 
         } else {
-            $categoriasRows = CategoriaController::obtenerDatosCategoriasSelect();
+            $categoriasRows = CategoriaController::obtenerDatosCategoriasSelect('get');
             return view("modulos.producto", ["productoRows" => $productoRows, "categoriasRows" => $categoriasRows]);
         }
 
