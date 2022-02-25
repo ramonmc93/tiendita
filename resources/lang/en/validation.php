@@ -232,12 +232,12 @@ return [
         'descripcionEspecificaProducto' => [
             'required' => "La descripción específica para el producto es obliglatoria.",
             'min' => "La descripción específica para el producto debe de tener una longitud mínima de 10 caracteres.",
-            'max' => "La descripción específica para el producto debe de tener una longitud máxima de 50 caracteres .",
+            'max' => "La descripción específica para el producto debe de tener una longitud máxima de 100 caracteres .",
         ],
         'descripcionGeneralProducto' => [
             'required' => "La descripción general para el producto es obliglatoria.",
             'min' => "La descripción general para el producto debe de tener una longitud mínima de 10 caracteres.",
-            'max' => "La descripción general para el producto debe de tener una longitud máxima de 50 caracteres .",
+            'max' => "La descripción general para el producto debe de tener una longitud máxima de 200 caracteres .",
         ],
         'precioProducto' => [
             'required' => "El precio del producto es obligatorio.",

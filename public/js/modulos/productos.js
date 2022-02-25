@@ -11,8 +11,67 @@ window.addEventListener("DOMContentLoaded", function(){
     // ---- Guardar / Modificar producto.
     $(document).on("click", ".btnGuardarActualizar", function(){
 
+        $("#frmProductos *.invalido").removeClass("invalido");
+        $(".contenedorNotificaciones").empty();
+
         try {
             
+            let campoNombreProducto = $("input[name='nombreProducto']");
+            let nombreProductoValor = campoNombreProducto.val().trim();
+            if ( nombreProductoValor.length < 3 || nombreProductoValor.length > 50 ) {
+                campoNombreProducto.addClass("invalido");
+                throw 'El nombre del producto es obligarorio y debe tener una longitud mínima de 3 caracteres máximo 50.';
+            }
+
+            let campoDescripcionEspecificaProducto = $("textarea[name='descripcionEspecificaProducto']");
+            let descripcionEspecificaProductoValor = campoDescripcionEspecificaProducto.val().trim();
+            if ( descripcionEspecificaProductoValor.length < 10 || descripcionEspecificaProductoValor.length > 100 ) {
+                campoDescripcionEspecificaProducto.addClass("invalido");
+                throw 'La descripción específica para el producto es obliglatoria y debe tener una longitud mínima de 10 caracteres y máxima 100 caracteres.';
+            }
+
+            let campoDescripcionGeneralProducto = $("textarea[name='descripcionGeneralProducto']");
+            let descripcionGeneralProductoValor = campoDescripcionGeneralProducto.val().trim();
+            if ( descripcionGeneralProductoValor.length < 10 || descripcionGeneralProductoValor.length > 200 ) {
+                campoDescripcionGeneralProducto.addClass("invalido");
+                throw 'La descripción general para el producto es obliglatoria y debe tener una longitud mínima de 10 caracteres y máxima 200 caracteres.';
+            }
+
+            let campoEstadoProducto = $("select[name='estadoProducto']");
+            let estadoProductoValor = campoEstadoProducto.val().trim();
+            if ( estadoProductoValor != "nvo" && estadoProductoValor != "udo" ) {
+                campoEstadoProducto.addClass("invalido");
+                throw 'El estado seleccionado para el producto es incorrecto.';
+            }
+
+            let campoPrecioProducto = $("input[name='precioProducto']");
+            let precioProductoValor = campoPrecioProducto.val().trim();
+            if ( precioProductoValor < 0 || !validarNumeroEntero(precioProductoValor) ) {
+                campoPrecioProducto.addClass("invalido");
+                throw 'El precio para el producto debe ser numérico mayor o igual a 0.';
+            }
+
+            let campoDescuentoProducto = $("input[name='descuentoProducto']");
+            let descuentoProductoValor = campoDescuentoProducto.val().trim();
+            if ( descuentoProductoValor != "" && ( descuentoProductoValor < 0 || !validarNumeroEntero(descuentoProductoValor) || descuentoProductoValor > 100 ) ) {
+                campoDescuentoProducto.addClass("invalido");
+                throw 'El descuento para el producto debe ser numérico mayor o igual a 0.';
+            }
+
+            let campoStockProducto = $("input[name='stockProducto']");
+            let stockProductoValor = campoStockProducto.val().trim();
+            if ( stockProductoValor != "" && ( stockProductoValor < 0 || !validarNumeroEntero(stockProductoValor) ) ) {
+                campoStockProducto.addClass("invalido");
+                throw 'El stock para el producto debe ser numérico mayor o igual a 0.';
+            }
+
+            let campoCategoriaProducto = $("select[name='categoriaProducto']");
+            let categoriaProductoValor = campoCategoriaProducto.val().trim();
+            if ( categoriaProductoValor <= 0 || !validarNumeroEntero(categoriaProductoValor) ) {
+                campoCategoriaProducto.addClass("invalido");
+                throw 'La categoría seleccionada es incorrecta.';
+            }
+
             let frmProducto = $("#frmProductos").serialize();
             
             $.ajax({
@@ -62,7 +121,7 @@ window.addEventListener("DOMContentLoaded", function(){
 
             bootbox.alert({
                 message: error,
-                className: 'd-flex align-items-center'
+                className: 'd-flex align-items-center colorFondoError'
             });
 
         }
